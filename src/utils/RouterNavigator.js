@@ -1,16 +1,21 @@
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import '../styles/utils.css'
 
 import Splash from '../pages/Splash';
 
-const RouterNavigator = (props) => (
+const RouterNavigator = ({ store }, props) => (
     <BrowserRouter>
         {props.children}
         <Routes>
-            <Route path="/splash" element={<Splash />}></Route>
+            <Route path="/" exact element={<Splash />}></Route>
         </Routes>
     </BrowserRouter>
 )
 
-export default BrowserRouter;
+RouterNavigator.propTypes = {
+    store: PropTypes.object.isRequired
+  }
+
+export default RouterNavigator;
