@@ -1,14 +1,23 @@
 import RouterNavigator from '../utils/RouterNavigator.js'
 import { Provider } from 'react-redux'
-import store from '../redux/store.js'
+import completeStore, { history } from '../redux/store.js'
+import { ConnectedRouter } from 'connected-react-router'
+import PropTypes from 'prop-types'
 
-export default function App() 
-{  
-    return (
+const store = completeStore()
+
+const App = () => (
         <Provider store={store}>
-            <div className="cl_application">
-                <RouterNavigator store={store} />
-            </div>
+            <ConnectedRouter history={history}>
+                    <div className="cl_application">
+                        <RouterNavigator store={store} />
+                    </div>
+            </ConnectedRouter>
         </Provider>
-    )
+)
+
+App.propTypes = {
+    history: PropTypes.object,
 }
+
+export default App

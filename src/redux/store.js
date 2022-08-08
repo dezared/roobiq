@@ -1,13 +1,33 @@
 import chatScriptSlice from '../redux/rootReducer.js'
-import { configureStore } from '@reduxjs/toolkit'
-import { applyMiddleware } from 'redux'
+import { createStore } from '@reduxjs/toolkit'
+import { applyMiddleware, compose, combineReducers } from 'redux'
+import { connectRouter, routerMiddleware } from 'connected-react-router'
+import { createBrowserHistory } from 'history'
 
-import logger from 'redux-logger'
+import thunk from 'redux-thunk'
+import { createLogger } from 'redux-logger'
 
-export default configureStore({
-    reducer: {
-      chatScript: chatScriptSlice
+const createRootReducer = (historyState) => combineReducers(
+    {
+        router: connectRouter(historyState),
+        chatScript: chatScriptSlice
     }
-  },
-  applyMiddleware([ logger ])
 )
+
+export const history = createBrowserHistory()
+
+export default function completeStore(preloadedState) {
+    const store = createStore(
+        createRootReducer(history),
+        preloadedState,
+        compose(
+            applyMiddleware(
+                routerMiddleware(history),
+                createLogger(),
+                
+            ),
+        ),
+    )
+
+    return store
+}

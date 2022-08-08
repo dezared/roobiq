@@ -1,21 +1,21 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import { Router, Route, Switch } from 'react-router-dom'
+import { history } from '../redux/store.js'
 
 import '../styles/utils.css'
 
 import Splash from '../pages/Splash';
+import Chat from '../pages/Chat';
 
-const RouterNavigator = ({ store }, props) => (
-    <BrowserRouter>
-        {props.children}
-        <Routes>
-            <Route path="/" exact element={<Splash />}></Route>
-        </Routes>
-    </BrowserRouter>
+const RouterNavigator = (props) => (
+    <Router history={history}>
+        <Switch>
+            <Route path="/" exact><Splash /></Route>
+            <Route path="/chat"><Chat /></Route>
+            <Route path="/ad" exact>ad</Route>
+            <Route><p>404 not found</p></Route>
+        </Switch>
+    </Router>   
 )
 
-RouterNavigator.propTypes = {
-    store: PropTypes.object.isRequired
-  }
 
 export default RouterNavigator;
