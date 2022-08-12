@@ -1,22 +1,22 @@
+/* eslint-disable max-len */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
-import App from '../src/utils/App.js'
+import App from './utils/App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 /*
   * У нас будет большое количество сценариев, нажав на кнопку мы запускаем тот или иной сценарий,
   * нам нужно создать репозиторий сценариев, которые бы запускались при том или ином действии
-  * 
+  *
   * Сценарии выполнены в виде последовательности данных ввода или нажатий тех иных кнопок
   * и их результат действий
-  * 
+  *
   * 1. Пользователь выбирает тип пути ( по началу только одно и оно автоматически запускается )
   * 2. Пользователю рендерится окно "чат-бота"
   * 3. Запускается сценарий с N количеством фаз, где каждая фаза - разная логика
