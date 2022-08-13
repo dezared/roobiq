@@ -12,6 +12,9 @@ const theme = createTheme({
       main: '#919FC7',
       text: '#FFFFFF',
     },
+    darkGrey: {
+      main: '#8B8F94',
+    },
     error: {
       main: red.A400,
     },

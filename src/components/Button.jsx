@@ -13,9 +13,33 @@ const theme = {
   },
 };
 
+const getBackgroundColor = (props) => {
+  if (props.variant === 'text' || props.variant === 'outlined') {
+    return undefined;
+  }
+
+  return theme[props.color]?.color || theme.primary.color;
+};
+
+const getTextColor = (props) => {
+  if (props.variant === 'text' || props.variant === 'outlined') {
+    return theme[props.color]?.color || theme.primary.color;
+  }
+
+  return '#FFFFFF';
+};
+
+const getHoverColor = (props) => {
+  if (props.variant === 'text' || props.variant === 'outlined') {
+    return undefined;
+  }
+
+  return theme[props.color]?.hoverColor || theme.primary.hoverColor;
+};
+
 export default styled(Button)`
   &.MuiButtonBase-root {
-    background: ${(props) => theme[props.color]?.color || theme.primary.color};
+    background: ${(props) => getBackgroundColor(props)};
     height: 48px;
     border-radius: 32px;
     border: 0;
@@ -23,10 +47,15 @@ export default styled(Button)`
     line-height: 24px;
     padding: 12px 16px;
     text-transform: none;
-    color: #FFFFFF;
+    color: ${(props) => getTextColor(props)};
     
     &:hover {
-      background: ${(props) => theme[props.color]?.hoverColor || theme.primary.hoverColor};
+      background: ${(props) => getHoverColor(props)};
+    }
+    
+    &:disabled {
+      background: #DADDE1;
+      color: #FFFFFF;
     }
   }
 `;

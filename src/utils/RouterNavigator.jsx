@@ -4,14 +4,16 @@ import history from '../redux/store';
 
 import '../styles/utils.css';
 
-import Splash from '../pages/Splash';
 import Components from '../pages/Components';
+import Login from '../pages/Login';
+import Registration from '../pages/Registration';
 
 function RouterNavigator() {
   return (
     <Router history={history}>
       <Switch>
-        <Route path="/" exact><Splash /></Route>
+        <Route path="/" exact><Login /></Route>
+        <Route path="/registration" exact><Registration /></Route>
         <Route path="/ad" exact>ad</Route>
         <Route path="/components" exact><Components /></Route>
         <Route><p>404 not found</p></Route>
