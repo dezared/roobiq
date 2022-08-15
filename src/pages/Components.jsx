@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
-import TextInput from '../components/TextInput';
-import Button from '../components/Button';
-import Avatar from '../components/Avatar';
-import ImagePicker from '../components/ImagePicker';
+import TextInput from '../components/controls/TextInput';
+import Button from '../components/controls/Button';
+import Avatar from '../components/controls/Avatar';
+import ImagePicker from '../components/controls/ImagePicker';
 
 const Box = styled.div`
   padding: 30px 50px;

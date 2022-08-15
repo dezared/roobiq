@@ -19,6 +19,18 @@ const theme = createTheme({
       main: red.A400,
     },
   },
+  overrides: {
+    MuiFormControl: {
+      root: {
+        height: '48px',
+      },
+    },
+    MuiInputBase: {
+      root: {
+        height: '48px',
+      },
+    },
+  },
 });
 
 export default theme;

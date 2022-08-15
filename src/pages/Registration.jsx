@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import logoStartPage from '../images/splash_logotype.png';
-import TextInput from '../components/TextInput';
-import Button from '../components/Button';
+import TextInput from '../components/controls/TextInput';
+import Button from '../components/controls/Button';
 import { registrationValidationSchema } from '../configs/validations';
 
 const Wrap = styled.div`
