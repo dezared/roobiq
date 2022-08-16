@@ -4,6 +4,8 @@ import TextActionBlock from './TextActionBlock';
 import { ActionType } from '../../../configs/scenarios';
 import TextArrayActionBlock from './TextArrayActionBlock';
 import ObjectArrayActionBlock from './ObjectArrayActionBlock';
+import SelectMultipleActionBlock from './SelectMultipleActionBlock';
+import ObjectActionBlock from './ObjectActionBlock';
 
 function ActionBlock({
   actionType, actionName, payload, onChange,
@@ -16,6 +18,22 @@ function ActionBlock({
     case ActionType.objectArray:
       return (
         <ObjectArrayActionBlock
+          actionName={actionName}
+          payload={payload}
+          onChange={onChange}
+        />
+      );
+    case ActionType.selectMultiple:
+      return (
+        <SelectMultipleActionBlock
+          actionName={actionName}
+          payload={payload}
+          onChange={onChange}
+        />
+      );
+    case ActionType.object:
+      return (
+        <ObjectActionBlock
           actionName={actionName}
           payload={payload}
           onChange={onChange}

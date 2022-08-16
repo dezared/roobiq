@@ -2,6 +2,8 @@ export const ActionType = {
   text: 'Text',
   textArray: 'TextArray',
   objectArray: 'ObjectArray',
+  selectMultiple: 'SelectMultiple',
+  object: 'Object',
 };
 
 const scenarios = [
@@ -101,6 +103,111 @@ const scenarios = [
           },
         },
         ],
+      },
+      {
+        id: 'market',
+        name: 'Рынок',
+        questions: [
+          {
+            id: 'market_segments',
+            question: 'В первую очередь выбери сегмент: B2B, B2C, B2G...или несколько.',
+            answerType: ActionType.selectMultiple,
+            payload: {
+              title: 'Сегмент',
+              btnText: 'Выбрать сегмент',
+              options: [{
+                value: 'b2c',
+                title: 'B2C',
+                description: 'когда клиенты любые физ.лица',
+              }, {
+                value: 'b2b',
+                title: 'B2B',
+                description: 'когда клиенты любые юр.лица',
+              }, {
+                value: 'b2g',
+                title: 'B2G',
+                description: 'когда клиенты государства',
+              }],
+            },
+          }, {
+            id: 'market_tam',
+            question: 'Укажи размеры рынков TAM (общий целевой рынок, где потенциально могут пользоваться продуктом), SAM (доступный объем рынка) и SOM (реально достижимый объем рынка), на который ориентирован твой продукт. Здесь надо  показать источники информации или дать ссылки на собственные исследования.',
+            answerType: ActionType.object,
+            payload: {
+              title: 'Рынок: TAM',
+              description: 'Нужно прописать ориентировочную цифру и дать пояснение.',
+              btnText: 'Указать',
+              itemName: 'ТАМ',
+
+              objectFields: [{
+                name: 'amount',
+                label: 'ТАМ',
+                placeholder: 'Цифру печатать тут',
+                type: ActionType.text,
+              }, {
+                name: 'description',
+                placeholder: 'Пояснение печатать тут',
+                type: ActionType.text,
+              }, {
+                name: 'source',
+                label: 'Источники',
+                placeholder: 'Источники печатать тут',
+                type: ActionType.text,
+              }],
+            },
+          }, {
+            id: 'market_sam',
+            question: 'Укажи в денежном выражении часть от предыдущего показателя, на основе тех, кто может себе позволить ваш продукт или аналог.',
+            answerType: ActionType.object,
+            payload: {
+              title: 'Рынок: SAM',
+              description: 'Нужно прописать ориентировочную цифру и дать пояснение.',
+              btnText: 'Указать',
+              itemName: 'SAM',
+
+              objectFields: [{
+                name: 'amount',
+                label: 'SAM',
+                placeholder: 'Цифру печатать тут',
+                type: ActionType.text,
+              }, {
+                name: 'description',
+                placeholder: 'Пояснение печатать тут',
+                type: ActionType.text,
+              }, {
+                name: 'source',
+                label: 'Источники',
+                placeholder: 'Источники печатать тут',
+                type: ActionType.text,
+              }],
+            },
+          }, {
+            id: 'market_som',
+            question: 'Укажи в денежном выражении сколько ваш продукт может забрать рынка за год (максимально реалистично). Сколько сможет оказать услуг, произвести продуктов и пр.',
+            answerType: ActionType.object,
+            payload: {
+              title: 'Рынок: SOM',
+              description: 'Нужно прописать ориентировочную цифру и дать пояснение.',
+              btnText: 'Указать',
+              itemName: 'SOM',
+
+              objectFields: [{
+                name: 'amount',
+                label: 'SOM',
+                placeholder: 'Цифру печатать тут',
+                type: ActionType.text,
+              }, {
+                name: 'description',
+                placeholder: 'Пояснение печатать тут',
+                type: ActionType.text,
+              }, {
+                name: 'source',
+                label: 'Источники',
+                placeholder: 'Источники печатать тут',
+                type: ActionType.text,
+              }],
+            },
+          }],
       },
     ],
   },

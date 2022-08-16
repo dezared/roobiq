@@ -198,16 +198,11 @@ const getValidationSchema = (objectFields) => {
   }), {});
 
   return Yup.object().shape({
-    items: Yup.array()
-      .of(
-        Yup.object().shape(schemeFields),
-      )
-      .min(1)
-      .required('Обязательное поле'),
+    item: Yup.object().shape(schemeFields),
   });
 };
 
-function FieldComponent({formik, fieldName, placeholder, type, index}) {
+function FieldComponent({formik, fieldName, placeholder, type}) {
   switch (type) {
     case ActionType.text:
       return (
@@ -218,11 +213,11 @@ function FieldComponent({formik, fieldName, placeholder, type, index}) {
               maxRows: 4,
             }}
             placeholder={placeholder}
-            name={`items.${index}.${fieldName}`}
-            value={formik.values.items[index][fieldName]}
+            name={`item.${fieldName}`}
+            value={formik.values.item[fieldName]}
             onChange={formik.handleChange}
           />
-          <ErrorBlock name={`items.${index}.${fieldName}`} />
+          <ErrorBlock name={`item.${fieldName}`} />
         </InputWrap>
       );
     default:
@@ -230,19 +225,20 @@ function FieldComponent({formik, fieldName, placeholder, type, index}) {
   }
 }
 
-function ObjectArrayActionBlock({
+function ObjectActionBlock({
   actionName, onChange, payload,
 }) {
   const [open, setOpen] = useState(false);
 
   const formik = useFormik({
     initialValues: {
-      items: new Array(payload.minElements || 1).fill(getEmptyObject(payload.objectFields)),
+      item: getEmptyObject(payload.objectFields),
     },
     validationSchema: getValidationSchema(payload.objectFields),
     onSubmit: (values) => {
-      onChange({ [actionName]: values.items });
+      onChange({ [actionName]: values.item });
       formik.resetForm();
+      handleClose();
     },
   });
 
@@ -273,59 +269,29 @@ function ObjectArrayActionBlock({
             <Title>{payload.title}</Title>
           </Header>
           <ContentWrap>
-            <FieldArray
-              name="items"
-              render={(arrayHelpers) => (
-                <>
-                  <Content>
-                    <Description>{payload.description}</Description>
-                    <ItemWrap>
-                      {formik.values.items.map((item, index) => (
-                        // eslint-disable-next-line react/no-array-index-key
-                        <Item key={index}>
-                          <ItemName>
-                            {payload.itemName}
-                            {' '}
-                            {index + 1}
-
-                          </ItemName>
-                          <RawWrap>
-                            <InputWrap>
-                              {payload.objectFields.map((field) => (
-                                <FieldComponent
-                                  key={field.name}
-                                  formik={formik}
-                                  index={index}
-                                  fieldName={field.name}
-                                  placeholder={field.placeholder}
-                                  type={field.type}
-                                />
-                              ))}
-                            </InputWrap>
-
-                            {formik.values.items.length > 1 && payload.deletable ? (
-                              <IconButtonWrap onClick={() => arrayHelpers.remove(index)}>
-                                <DeleteIcon />
-                              </IconButtonWrap>
-                            ) : null}
-                          </RawWrap>
-                        </Item>
-                      ))}
-                    </ItemWrap>
-                  </Content>
-
-                  {payload.addable ? (
-                    <>
-                      <DividerGrey />
-
-                      <ButtonWrap>
-                        <Button color="secondary" onClick={() => arrayHelpers.push(getEmptyObject(payload.objectFields))}>Добавить пункт</Button>
-                      </ButtonWrap>
-                    </>
-                  ) : null}
-                </>
-              )}
-            />
+            <Content>
+              <Description>{payload.description}</Description>
+              <ItemWrap>
+                  <Item>
+                    <ItemName>
+                      {payload.itemName}
+                    </ItemName>
+                    <RawWrap>
+                      <InputWrap>
+                        {payload.objectFields.map((field) => (
+                          <FieldComponent
+                            key={field.name}
+                            formik={formik}
+                            fieldName={field.name}
+                            placeholder={field.placeholder}
+                            type={field.type}
+                          />
+                        ))}
+                      </InputWrap>
+                    </RawWrap>
+                  </Item>
+              </ItemWrap>
+            </Content>
           </ContentWrap>
 
           <SaveBtn type="submit" onClick={onSubmit}>Сохранить</SaveBtn>
@@ -335,4 +301,4 @@ function ObjectArrayActionBlock({
   );
 }
 
-export default ObjectArrayActionBlock;
+export default ObjectActionBlock;

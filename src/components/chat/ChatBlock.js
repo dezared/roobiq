@@ -41,6 +41,8 @@ const QuestionBlock = styled(MessageBlock)`
 
 const AnswerBackground = styled(MessageBlock)`
   background: #E6EBF9;
+  display: flex;
+  flex-direction: column;
 `;
 
 const QuestionBlockWrap = styled.div`
@@ -97,6 +99,17 @@ function AnswerBlock({ answerType, answer, payload }) {
           </List>
         </AnswerBackground>
       );
+    case ActionType.selectMultiple:
+      return (
+        <AnswerBackground>
+          <List>
+            {answer.map((item, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <li key={index}>{payload.options.find(({ value }) => item === value).title}</li>
+            ))}
+          </List>
+        </AnswerBackground>
+      );
     case ActionType.objectArray:
       return (
         <AnswerBackground>
@@ -114,6 +127,16 @@ function AnswerBlock({ answerType, answer, payload }) {
               </ListItem>
             ))}
           </List>
+        </AnswerBackground>
+      );
+    case ActionType.object:
+      return (
+        <AnswerBackground>
+          {payload.objectFields.map((field) => (
+            <Field key={field.name}>
+              {`${field.label ? `${field.label}: ` : ''}${answer[field.name]}`}
+            </Field>
+          ))}
         </AnswerBackground>
       );
     default:

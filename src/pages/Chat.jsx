@@ -127,7 +127,6 @@ function Chat() {
   const onActionChange = (obj) => {
     setAnswers({ ...answers, ...obj });
     setQuestionIndex(questionIndex + 1);
-    console.log({ ...answers, ...obj });
   };
 
   const onNextTab = () => {
