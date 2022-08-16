@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
-import initScenarios from '../configs/scenarios';
+import initScenarios, { ActionType as AnswerType } from '../configs/scenarios';
 import ActionBlock from '../components/chat/action-block/ActionBlock';
 import ChatBlockComponent from '../components/chat/ChatBlock';
 import Button from '../components/controls/Button';
@@ -66,7 +66,12 @@ function Chat() {
     () => {
       const newChat = [];
       if (stepIndex === 0) {
-        newChat.push({ question: 'Расскажи мне о цели презентации пожалуйста', answer: 'Привлечь инвестора', id: 'first' });
+        newChat.push({
+          question: 'Расскажи мне о цели презентации пожалуйста',
+          answer: 'Привлечь инвестора',
+          id: 'first',
+          answerType: AnswerType.text,
+        });
       }
 
       // eslint-disable-next-line no-restricted-syntax
@@ -79,12 +84,21 @@ function Chat() {
         newChat.push({
           question: question.question,
           answer: answers[question.id],
+          answerType: question.answerType,
           id: question.id,
         });
       }
 
-      newChat.push({ question: 'Ты молодец! Мы заполнили секцию ✅', id: 'nice' });
-      newChat.push({ question: 'Посмотри, что получилось или давай двигаться дальше)', id: 'next' });
+      newChat.push({
+        question: 'Ты молодец! Мы заполнили секцию ✅',
+        id: 'nice',
+        answerType: AnswerType.text,
+      });
+      newChat.push({
+        question: 'Посмотри, что получилось или давай двигаться дальше)',
+        id: 'next',
+        answerType: AnswerType.text,
+      });
 
       return newChat;
     },
@@ -97,6 +111,12 @@ function Chat() {
     console.log({ ...answers, ...obj });
   };
 
+  const onNextTab = () => {
+    setStepIndex(stepIndex + 1);
+    setQuestionIndex(0);
+    setAnswers({});
+  };
+
   return (
     <Wrap>
       <Content>
@@ -107,11 +127,12 @@ function Chat() {
             actionType={currentQuestion.answerType}
             actionName={currentQuestion.id}
             onChange={onActionChange}
+            payload={currentQuestion.payload}
           />
         ) : (
           <BtnGroup>
             <Button>Смотреть</Button>
-            <Button color="secondary">Продолжить создание</Button>
+            <Button color="secondary" onClick={onNextTab}>Продолжить создание</Button>
           </BtnGroup>
         )}
 

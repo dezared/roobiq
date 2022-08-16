@@ -2,6 +2,7 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import Avatar from '../controls/Avatar';
+import { ActionType } from '../../configs/scenarios';
 
 const Wrap = styled.div`
   width: 100%;
@@ -25,7 +26,7 @@ const QuestionBlock = styled(MessageBlock)`
   background: #F8F8F8;
 `;
 
-const AnswerBlock = styled(MessageBlock)`
+const AnswerBackground = styled(MessageBlock)`
   background: #E6EBF9;
 `;
 
@@ -39,6 +40,30 @@ const AnswerBlockWrap = styled.div`
   justify-content: flex-end;
 `;
 
+const List = styled.ul`
+  list-style-type: disc;
+  list-style-position: inside;
+`;
+
+function AnswerBlock({ answerType, answer }) {
+  switch (answerType) {
+    case ActionType.text:
+      return <AnswerBackground>{answer}</AnswerBackground>;
+    case ActionType.textArray:
+      return (
+        <AnswerBackground>
+          <List>
+            {answer.map((item) => (
+              <li>{item}</li>
+            ))}
+          </List>
+        </AnswerBackground>
+      );
+    default:
+      throw new Error(`Answer type "${answerType}" does not exists`);
+  }
+}
+
 // eslint-disable-next-line react/prop-types
 function ChatBlock({ chat, className }) {
   return (
@@ -51,7 +76,11 @@ function ChatBlock({ chat, className }) {
               <QuestionBlock>{row.question}</QuestionBlock>
             </QuestionBlockWrap>
             {row.answer
-              ? (<AnswerBlockWrap><AnswerBlock>{row.answer}</AnswerBlock></AnswerBlockWrap>)
+              ? (
+                <AnswerBlockWrap>
+                  <AnswerBlock answer={row.answer} answerType={row.answerType} />
+                </AnswerBlockWrap>
+              )
               : null}
           </Fragment>
         ))
