@@ -1,15 +1,15 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 import logoStartPage from '../images/splash_logotype.png';
 import '../styles/pages/splash.css';
 
 function Splash() {
-  const dispatch = useDispatch();
-  const botScriptState = useSelector((state) => state.chatScript.value);
-
-  const StartBaseScriptCallBack = () => {
-    dispatch({ type: 'chatScript/startBaseScript' });
-  };
+  // const dispatch = useDispatch();
+  // // const botScriptState = useSelector((state) => state.chatScript.value);
+  //
+  // const StartBaseScriptCallBack = () => {
+  //   dispatch({ type: 'chatScript/startBaseScript' });
+  // };
 
   return (
     <div>
@@ -21,8 +21,6 @@ function Splash() {
         <span className="spash_title_postfix">IQ</span>
       </h1>
       <p className="splash_hello_message">Конструктор презентаций с расчетом экономических показателей.</p>
-      <button type="button" onClick={StartBaseScriptCallBack} className="button primary medium">Начать</button>
-      <button type="button" onClick={() => console.log(botScriptState)} className="button primary medium">ssa</button>
     </div>
   );
 }

@@ -56,6 +56,7 @@
   "devDependencies": {
     "eslint": "^8.21.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-json": "^2.0.0",
     "eslint-plugin-react": "^7.30.1"
   }
 }
