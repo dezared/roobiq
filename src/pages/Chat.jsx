@@ -1,10 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React, { useMemo, useState } from 'react';
+import React, {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
 import styled from 'styled-components';
 import initScenarios, { ActionType as AnswerType } from '../configs/scenarios';
 import ActionBlock from '../components/chat/action-block/ActionBlock';
 import ChatBlockComponent from '../components/chat/ChatBlock';
 import Button from '../components/controls/Button';
+import TabsContainer from '../components/TabsContainer';
 
 const Wrap = styled.div`
   width: 100%;
@@ -22,15 +25,11 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-const Tabs = styled.div`
-  width: 100%;
-`;
-
 const ChatBlock = styled(ChatBlockComponent)`
   width: 100%;
-  flex: 1;
   margin-bottom: 32px;
+  overflow: hidden;
+  flex: 1;
 `;
 
 const BtnGroup = styled.div`
@@ -62,6 +61,25 @@ function Chat() {
     [currentStep, questionIndex],
   );
 
+  const getStatusByIndex = useCallback((index) => {
+    if (index < stepIndex) return 'prev';
+    if (index > stepIndex) return 'next';
+
+    return 'current';
+  }, [stepIndex]);
+
+  const tabs = useMemo(
+    () => scenario.steps
+      .sort((a, b) => a.order - b.order)
+      .map((item, index) => ({
+        status: getStatusByIndex(index),
+        id: item.id,
+        index,
+        children: item.name,
+      })),
+    [scenario.steps, getStatusByIndex],
+  );
+
   const chat = useMemo(
     () => {
       const newChat = [];
@@ -77,7 +95,7 @@ function Chat() {
       // eslint-disable-next-line no-restricted-syntax
       for (const question of currentStep.questions) {
         if (!answers[question.id]) {
-          newChat.push({ question: question.question, id: question.id });
+          newChat.push({ question: question.question, id: question.id, payload: question.payload });
           return newChat;
         }
 
@@ -85,6 +103,7 @@ function Chat() {
           question: question.question,
           answer: answers[question.id],
           answerType: question.answerType,
+          payload: question.payload,
           id: question.id,
         });
       }
@@ -120,7 +139,7 @@ function Chat() {
   return (
     <Wrap>
       <Content>
-        <Tabs>Tabs</Tabs>
+        <TabsContainer tabs={tabs} />
         <ChatBlock chat={chat} />
         {currentQuestion ? (
           <ActionBlock

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars,react/prop-types */
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Avatar from '../controls/Avatar';
 import { ActionType } from '../../configs/scenarios';
@@ -7,9 +7,22 @@ import { ActionType } from '../../configs/scenarios';
 const Wrap = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column-reverse;
+`;
+
+const Inner = styled.div`
+  display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   gap: 16px;
+  width: 100%;
+  overflow-y: auto;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+
+
+  &::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+  }
 `;
 
 const MessageBlock = styled.div`
@@ -45,7 +58,31 @@ const List = styled.ul`
   list-style-position: inside;
 `;
 
-function AnswerBlock({ answerType, answer }) {
+const ListItem = styled.div`
+  //display: flex;
+  //flex-direction: column;
+  position: relative;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 9px;
+    left: -4px;
+    width: 5px;
+    height: 5px;
+    background-color: #000;
+    border-radius: 50%;
+  }
+`;
+
+const Field = styled.span`
+  display: inline-block;
+`;
+
+function AnswerBlock({ answerType, answer, payload }) {
   switch (answerType) {
     case ActionType.text:
       return <AnswerBackground>{answer}</AnswerBackground>;
@@ -53,8 +90,28 @@ function AnswerBlock({ answerType, answer }) {
       return (
         <AnswerBackground>
           <List>
-            {answer.map((item) => (
-              <li>{item}</li>
+            {answer.map((item, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <li key={index}>{item}</li>
+            ))}
+          </List>
+        </AnswerBackground>
+      );
+    case ActionType.objectArray:
+      return (
+        <AnswerBackground>
+          <List>
+            {answer.map((item, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <ListItem key={index}>
+                {payload.objectFields.map((field) => (
+                  <Fragment key={field.name}>
+                    <Field>
+                      {`${field.label}: ${item[field.name]}`}
+                    </Field>
+                  </Fragment>
+                ))}
+              </ListItem>
             ))}
           </List>
         </AnswerBackground>
@@ -66,25 +123,39 @@ function AnswerBlock({ answerType, answer }) {
 
 // eslint-disable-next-line react/prop-types
 function ChatBlock({ chat, className }) {
+  const innerRef = useRef();
+
+  useEffect(() => {
+    // eslint-disable-next-line no-debugger
+    innerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    innerRef.current.scrollTop = innerRef.current.scrollHeight;
+  }, [chat]);
+
   return (
     <Wrap className={className}>
-      {
-        chat.map((row) => (
-          <Fragment key={row.id}>
-            <QuestionBlockWrap>
-              <Avatar color="#7A94DF">R</Avatar>
-              <QuestionBlock>{row.question}</QuestionBlock>
-            </QuestionBlockWrap>
-            {row.answer
-              ? (
-                <AnswerBlockWrap>
-                  <AnswerBlock answer={row.answer} answerType={row.answerType} />
-                </AnswerBlockWrap>
-              )
-              : null}
-          </Fragment>
-        ))
-      }
+      <Inner ref={innerRef}>
+        {
+          chat.map((row) => (
+            <Fragment key={row.id}>
+              <QuestionBlockWrap>
+                <Avatar color="#7A94DF">R</Avatar>
+                <QuestionBlock>{row.question}</QuestionBlock>
+              </QuestionBlockWrap>
+              {row.answer
+                ? (
+                  <AnswerBlockWrap>
+                    <AnswerBlock
+                      answer={row.answer}
+                      answerType={row.answerType}
+                      payload={row.payload}
+                    />
+                  </AnswerBlockWrap>
+                )
+                : null}
+            </Fragment>
+          ))
+        }
+      </Inner>
     </Wrap>
   );
 }

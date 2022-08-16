@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars,react/prop-types */
+/* eslint-disable */
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import {
@@ -14,6 +14,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import TextInput from '../../controls/TextInput';
 import Button from '../../controls/Button';
 import ErrorBlock from '../../controls/ErrorBlock';
+import { ActionType } from '../../../configs/scenarios';
 
 const Wrap = styled.div`
   width: 100%;
@@ -122,9 +123,19 @@ const ButtonWrap = styled.div`
 
 const InputWrap = styled.div`
   display: flex;
-  align-items: center;
-  gap: 16px;
+  flex-direction: column;
   width: 100%;
+`;
+
+const IconButtonWrap = styled(IconButton)`
+  display: flex;
+  align-self: flex-start;
+  height: 48px;
+`;
+
+const RawWrap = styled.div`
+  display: flex;
+  gap: 16px;
 `;
 
 const TextArea = styled(TextInput)`
@@ -157,16 +168,78 @@ const SaveBtn = styled(Button)`
   }
 `;
 
-function TextArrayActionBlock({ actionName, onChange, payload }) {
+const getDefaultValueByType = (type) => {
+  switch (type) {
+    case ActionType.text:
+      return '';
+    default:
+      throw new Error(`Action type "${type}" does not exists`);
+  }
+};
+
+const getEmptyObject = (objectFields) => objectFields.reduce((previousValue, currentValue) => ({
+  ...previousValue,
+  [currentValue.name]: getDefaultValueByType(currentValue.type),
+}), {});
+
+const getValidationSchemaByType = (type) => {
+  switch (type) {
+    case ActionType.text:
+      return Yup.string();
+    default:
+      throw new Error(`Action type "${type}" does not exists`);
+  }
+};
+
+const getValidationSchema = (objectFields) => {
+  const schemeFields = objectFields.reduce((previousValue, currentValue) => ({
+    ...previousValue,
+    [currentValue.name]: getValidationSchemaByType(currentValue.type).required('Обязательное поле'),
+  }), {});
+
+  return Yup.object().shape({
+    items: Yup.array()
+      .of(
+        Yup.object().shape(schemeFields),
+      )
+      .min(1)
+      .required('Обязательное поле'),
+  });
+};
+
+function FieldComponent({formik, fieldName, placeholder, type, index}) {
+  switch (type) {
+    case ActionType.text:
+      return (
+        <InputWrap>
+          <TextArea
+            multiline
+            InputProps={{
+              maxRows: 4,
+            }}
+            placeholder={placeholder}
+            name={`items.${index}.${fieldName}`}
+            value={formik.values.items[index][fieldName]}
+            onChange={formik.handleChange}
+          />
+          <ErrorBlock name={`items.${index}.${fieldName}`} />
+        </InputWrap>
+      );
+    default:
+      throw new Error(`Action type "${type}" does not exists`);
+  }
+}
+
+function ObjectArrayActionBlock({
+  actionName, onChange, payload,
+}) {
   const [open, setOpen] = useState(false);
 
   const formik = useFormik({
     initialValues: {
-      items: new Array(payload.minElements || 1).fill(''),
+      items: new Array(payload.minElements || 1).fill(getEmptyObject(payload.objectFields)),
     },
-    validationSchema: Yup.object().shape({
-      items: Yup.array().of(Yup.string().required('Обязательное поле')).min(1).required('Обязательное поле'),
-    }),
+    validationSchema: getValidationSchema(payload.objectFields),
     onSubmit: (values) => {
       onChange({ [actionName]: values.items });
       formik.resetForm();
@@ -186,6 +259,7 @@ function TextArrayActionBlock({ actionName, onChange, payload }) {
     formik.handleSubmit();
   }, [formik]);
 
+  console.log(formik.values.items);
   return (
     <Wrap>
       <Btn onClick={handleOpen}>{payload.btnText}</Btn>
@@ -216,36 +290,40 @@ function TextArrayActionBlock({ actionName, onChange, payload }) {
                             {index + 1}
 
                           </ItemName>
-                          <div>
+                          <RawWrap>
                             <InputWrap>
-                              <TextArea
-                                multiline
-                                InputProps={{
-                                  maxRows: 4,
-                                }}
-                                placeholder="Печатать тут"
-                                name={`items.${index}`}
-                                value={formik.values.items[index]}
-                                onChange={formik.handleChange}
-                              />
-                              {formik.values.items.length > 1 ? (
-                                <IconButton onClick={() => arrayHelpers.remove(index)}>
-                                  <DeleteIcon />
-                                </IconButton>
-                              ) : null}
+                              {payload.objectFields.map((field) => (
+                                <FieldComponent
+                                  key={field.name}
+                                  formik={formik}
+                                  index={index}
+                                  fieldName={field.name}
+                                  placeholder={field.placeholder}
+                                  type={field.type}
+                                />
+                              ))}
                             </InputWrap>
-                            <ErrorBlock name={`items.${index}`} />
-                          </div>
+
+                            {formik.values.items.length > 1 && payload.deletable ? (
+                              <IconButtonWrap onClick={() => arrayHelpers.remove(index)}>
+                                <DeleteIcon />
+                              </IconButtonWrap>
+                            ) : null}
+                          </RawWrap>
                         </Item>
                       ))}
                     </ItemWrap>
                   </Content>
 
-                  <DividerGrey />
+                  {payload.addable ? (
+                    <>
+                      <DividerGrey />
 
-                  <ButtonWrap>
-                    <Button color="secondary" onClick={() => arrayHelpers.push('')}>Добавить пункт</Button>
-                  </ButtonWrap>
+                      <ButtonWrap>
+                        <Button color="secondary" onClick={() => arrayHelpers.push(getEmptyObject(payload.objectFields))}>Добавить пункт</Button>
+                      </ButtonWrap>
+                    </>
+                  ) : null}
                 </>
               )}
             />
@@ -258,4 +336,4 @@ function TextArrayActionBlock({ actionName, onChange, payload }) {
   );
 }
 
-export default TextArrayActionBlock;
+export default ObjectArrayActionBlock;

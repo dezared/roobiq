@@ -7,26 +7,31 @@ const TabCont = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 16px 0px 16px 16px;
+  padding: 16px 0 16px 16px;
   gap: 12px;
-
+  overflow-y: hidden;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
   
-  width: 375px;
-  height: 88px;
-  left: 0px;
-  top: 44px;
+  width: 100%;
+  
+  &::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+  }
 `;
 
 function TabsContainer({ tabs }) {
   return (
     <TabCont>
-
-      {tabs.map((tab, index) => <TabIcon status={tab.status} index={index} key={tab.id}>{tab.children}</TabIcon>)}
+      {tabs.map((tab, index) => (
+        <TabIcon status={tab.status} index={index} key={tab.id}>{tab.children}</TabIcon>
+      ))}
     </TabCont>
   );
 }
 
 TabsContainer.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   tabs: PropTypes.array,
 };
 
@@ -37,6 +42,12 @@ TabsContainer.defaultProps = {
     },
     {
       status: 'current', id: 2, index: 2, children: 'solution',
+    },
+    {
+      status: 'next', id: 3, index: 3, children: 'target',
+    },
+    {
+      status: 'next', id: 3, index: 3, children: 'target',
     },
     {
       status: 'next', id: 3, index: 3, children: 'target',
