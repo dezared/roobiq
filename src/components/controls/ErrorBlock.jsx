@@ -11,10 +11,14 @@ const Wrap = styled.span`
   display: block;
 `;
 
-function ErrorBlock(props) {
+// eslint-disable-next-line
+function ErrorBlock({ value, type = 'input', ...props }) {
   return (
     <Wrap>
-      <ErrorMessage {...props} />
+      {(
+        (typeof value !== 'string' && type === 'input') // this is because of it https://stackoverflow.com/questions/66744248/how-to-add-error-message-to-yup-validation-for-array-containing-distinct-values
+        || (typeof value === 'string' && type === 'form')
+      ) && <ErrorMessage {...props} />}
     </Wrap>
   );
 }

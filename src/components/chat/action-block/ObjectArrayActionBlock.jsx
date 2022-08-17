@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useCallback, useState } from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import styled from 'styled-components';
 import {
   Divider,
@@ -15,6 +15,9 @@ import TextInput from '../../controls/TextInput';
 import Button from '../../controls/Button';
 import ErrorBlock from '../../controls/ErrorBlock';
 import { ActionType } from '../../../configs/scenarios';
+import Checkbox from "../../controls/Checkbox";
+import {Image} from "@mui/icons-material";
+import ImagePicker from "../../controls/ImagePicker";
 
 const Wrap = styled.div`
   width: 100%;
@@ -168,10 +171,47 @@ const SaveBtn = styled(Button)`
   }
 `;
 
+const CheckboxesWrap = styled.label`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 16px;
+`;
+
+const CheckboxWrap = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`;
+
+const CheckboxLabel = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const CheckboxTitle = styled.span`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #2E3135;
+`;
+
+const CheckboxDescription = styled.span`
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  color: #838285;
+`;
+
+
 const getDefaultValueByType = (type) => {
   switch (type) {
     case ActionType.text:
       return '';
+    case ActionType.checkboxArray:
+      return [];
+    case ActionType.image:
+      return null;
     default:
       throw new Error(`Action type "${type}" does not exists`);
   }
@@ -186,6 +226,11 @@ const getValidationSchemaByType = (type) => {
   switch (type) {
     case ActionType.text:
       return Yup.string();
+    case ActionType.checkboxArray:
+      return Yup.array();
+    case ActionType.image:
+      return Yup.string();
+      break;
     default:
       throw new Error(`Action type "${type}" does not exists`);
   }
@@ -207,7 +252,38 @@ const getValidationSchema = (objectFields) => {
   });
 };
 
-function FieldComponent({formik, fieldName, placeholder, type, index}) {
+function FieldComponent({formik, fieldName, placeholder, type, index, sourceField, answers}) {
+  const handleChange = useCallback((e, value) => {
+    const arr = [...formik.values.items[index][fieldName]];
+    if (e.target.checked) {
+      arr.push(value);
+    } else {
+      arr.splice(arr.indexOf(value), 1);
+    }
+
+    formik.setFieldValue(`items.${index}.${fieldName}`, arr);
+  }, [formik]);
+
+  const onDelete = () => {
+    formik.setFieldValue(`items.${index}.${fieldName}`, undefined);
+  };
+
+  const onChangeFile = (newFile) => {
+    formik.setFieldValue(`items.${index}.${fieldName}`, newFile);
+  };
+
+  const fileUrl = useMemo(() => {
+    const file = formik.values.items[index][fieldName];
+
+    if (!file || type !== ActionType.image) return null;
+
+    if (typeof file === 'object') {
+      return URL.createObjectURL(file);
+    }
+
+    return file;
+  }, [formik.values.items[index][fieldName]]);
+
   switch (type) {
     case ActionType.text:
       return (
@@ -225,13 +301,46 @@ function FieldComponent({formik, fieldName, placeholder, type, index}) {
           <ErrorBlock name={`items.${index}.${fieldName}`} />
         </InputWrap>
       );
+    case ActionType.image:
+      return (
+        <InputWrap>
+          <ImagePicker file={fileUrl} onChangeFile={onChangeFile} onDelete={onDelete} />
+          <ErrorBlock name={`items.${index}.${fieldName}`} />
+        </InputWrap>
+      );
+    case ActionType.checkboxArray:
+      return (
+        <CheckboxesWrap>
+            {answers[sourceField].map((option) => (
+              <CheckboxWrap key={option}>
+                <Checkbox
+                  checkedIcon={(
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="8" cy="8" r="6" stroke="#345CCE" strokeWidth="4" />
+                    </svg>
+                  )}
+                  icon={(
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="8" cy="8" r="7.5" stroke="#8B8F94" />
+                    </svg>
+                  )}
+                  checked={formik.values.items[index][fieldName].includes(option)}
+                  onChange={(e) => handleChange(e, option)}
+                />
+                <CheckboxLabel>
+                  <CheckboxTitle>{option}</CheckboxTitle>
+                </CheckboxLabel>
+              </CheckboxWrap>
+            ))}
+        </CheckboxesWrap>
+      );
     default:
       throw new Error(`Action type "${type}" does not exists`);
   }
 }
 
 function ObjectArrayActionBlock({
-  actionName, onChange, payload,
+  actionName, onChange, payload, answers,
 }) {
   const [open, setOpen] = useState(false);
 
@@ -243,6 +352,7 @@ function ObjectArrayActionBlock({
     onSubmit: (values) => {
       onChange({ [actionName]: values.items });
       formik.resetForm();
+      handleClose();
     },
   });
 
@@ -298,12 +408,14 @@ function ObjectArrayActionBlock({
                                   index={index}
                                   fieldName={field.name}
                                   placeholder={field.placeholder}
+                                  sourceField={field.sourceField}
                                   type={field.type}
+                                  answers={answers}
                                 />
                               ))}
                             </InputWrap>
 
-                            {formik.values.items.length > 1 && payload.deletable ? (
+                            {formik.values.items.length > 1 && payload.deletable !== false ? (
                               <IconButtonWrap onClick={() => arrayHelpers.remove(index)}>
                                 <DeleteIcon />
                               </IconButtonWrap>
@@ -314,7 +426,7 @@ function ObjectArrayActionBlock({
                     </ItemWrap>
                   </Content>
 
-                  {payload.addable ? (
+                  {payload.addable !== false ? (
                     <>
                       <DividerGrey />
 

@@ -8,7 +8,7 @@ import SelectMultipleActionBlock from './SelectMultipleActionBlock';
 import ObjectActionBlock from './ObjectActionBlock';
 
 function ActionBlock({
-  actionType, actionName, payload, onChange,
+  actionType, actionName, payload, onChange, answers,
 }) {
   switch (actionType) {
     case ActionType.text:
@@ -21,6 +21,7 @@ function ActionBlock({
           actionName={actionName}
           payload={payload}
           onChange={onChange}
+          answers={answers}
         />
       );
     case ActionType.selectMultiple:

@@ -57,7 +57,7 @@ function TextActionBlock({ actionName, onChange }) {
       text: '',
     },
     validationSchema: Yup.object().shape({
-      text: Yup.string().required('Обязательное поле').max(60, 'Максимум 60 символов'),
+      text: Yup.string().required('Обязательное поле').max(160, 'Максимум 160 символов'),
     }),
     onSubmit: (values) => {
       onChange({ [actionName]: values.text });

@@ -84,6 +84,19 @@ const Field = styled.span`
   display: inline-block;
 `;
 
+const getFieldContent = (field, item) => {
+  switch (field.type) {
+    case ActionType.text:
+      return `${field.label}: ${item[field.name]}`;
+    case ActionType.checkboxArray:
+      return `${field.label}: ${item[field.name].join(', ') || '-'}`;
+    case ActionType.image:
+      return null;
+    default:
+      throw new Error(`Answer type "${field.type}" does not exists`);
+  }
+};
+
 function AnswerBlock({ answerType, answer, payload }) {
   switch (answerType) {
     case ActionType.text:
@@ -105,7 +118,7 @@ function AnswerBlock({ answerType, answer, payload }) {
           <List>
             {answer.map((item, index) => (
               // eslint-disable-next-line react/no-array-index-key
-              <li key={index}>{payload.options.find(({ value }) => item === value).title}</li>
+              <li key={index}>{item}</li>
             ))}
           </List>
         </AnswerBackground>
@@ -120,7 +133,7 @@ function AnswerBlock({ answerType, answer, payload }) {
                 {payload.objectFields.map((field) => (
                   <Fragment key={field.name}>
                     <Field>
-                      {`${field.label}: ${item[field.name]}`}
+                      {getFieldContent(field, item)}
                     </Field>
                   </Fragment>
                 ))}

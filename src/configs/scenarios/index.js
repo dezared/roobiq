@@ -1,9 +1,11 @@
 export const ActionType = {
   text: 'Text',
+  checkboxArray: 'CheckboxArray',
   textArray: 'TextArray',
   objectArray: 'ObjectArray',
   selectMultiple: 'SelectMultiple',
   object: 'Object',
+  image: 'Image',
 };
 
 const scenarios = [
@@ -76,7 +78,8 @@ const scenarios = [
           id: 'product_feature',
           question: 'Опиши своё решение 1 тезисом',
           answerType: ActionType.text,
-        }, {
+        },
+        {
           id: 'audience_segments',
           question: 'Теперь, нужно раскрыть решение. Я подготовил для этого слайд с 3 пунктами. Заполни их пожалуйста.',
           answerType: ActionType.objectArray,
@@ -208,6 +211,270 @@ const scenarios = [
               }],
             },
           }],
+      },
+      {
+        id: 'competitors',
+        name: 'Конкуренты',
+        questions: [
+          {
+            id: 'competitors_properties',
+            question: 'Далее опиши чем твой продукт лучше конкурентов...',
+            answerType: ActionType.textArray,
+            payload: {
+              title: 'Свойства конкурентов',
+              description: 'Сформулируй функциональные свойства, по которым будем сравнить твой продукт с конкурентами для демонстрации преимуществ.',
+              itemName: 'Свойство',
+              btnText: 'Описать',
+            },
+          }, {
+            id: 'direct_competitors',
+            question: 'Напиши основных ПРЯМЫХ конкурентов (делают тоже самое, что и ты и их ЦА такая же как у тебя)',
+            answerType: ActionType.objectArray,
+            payload: {
+              title: 'Прямые конкуренты',
+              description: 'Прямые конкуренты делают тоже самое, что и ты и их ЦА такая же как у тебя. Также отметь свойства, которые есть у конкурентов.',
+              itemName: 'Конкурент',
+              btnText: 'Прописать прямых',
+              minElements: 3,
+
+              objectFields: [{
+                name: 'name',
+                label: 'Конкурент',
+                placeholder: 'Название печатать тут',
+                type: ActionType.text,
+              }, {
+                name: 'properties',
+                label: 'Свойства',
+                type: ActionType.checkboxArray,
+                sourceField: 'competitors_properties',
+              }],
+            },
+          }, {
+            id: 'indirect_competitors',
+            question: 'Напиши основных КОСВЕННЫХ конкурентов (компании близкие к твоему рынку, но главный бизнес-процесс основан на других продуктах, потенциально ЦА может решить свою проблему хотя бы частично через них)',
+            answerType: ActionType.objectArray,
+            payload: {
+              title: 'Косвенные конкуренты',
+              description: 'Косвенные (Компании близкие к твоему рынку, но главный бизнес-процесс основан на других продуктах, потенциально ЦА может решить свою проблему хотя бы частично через них). Также отметь свойства, которые есть у конкурентов.',
+              itemName: 'Конкурент',
+              btnText: 'Прописать прямых',
+              minElements: 2,
+
+              objectFields: [{
+                name: 'name',
+                label: 'Конкурент',
+                placeholder: 'Название печатать тут',
+                type: ActionType.text,
+              }, {
+                name: 'properties',
+                label: 'Свойства',
+                type: ActionType.checkboxArray,
+                sourceField: 'competitors_properties',
+              }],
+            },
+          }, {
+            id: 'alternative_competitors',
+            question: 'Напиши основных АЛЬТЕРНАТИВНЫХ конкурентов (компании вообще не из твоего рынка, но через их продукты можно закрыть проблему)',
+            answerType: ActionType.objectArray,
+            payload: {
+              title: 'Альтернативные конкуренты',
+              description: 'Альтернативы (компании вообще не из твоего рынка, но через их продукты можно закрыть проблему).. Также отметь свойства, которые есть у конкурентов.',
+              itemName: 'Конкурент',
+              btnText: 'Прописать прямых',
+              minElements: 1,
+
+              objectFields: [{
+                name: 'name',
+                label: 'Конкурент',
+                placeholder: 'Название печатать тут',
+                type: ActionType.text,
+              }, {
+                name: 'properties',
+                label: 'Свойства',
+                type: ActionType.checkboxArray,
+                sourceField: 'competitors_properties',
+              }],
+            },
+          }, {
+            id: 'competitors_difference',
+            question: 'Теперь нужно прописать отличия, чтобы отстроиться от конкурентов и подчеркнуть то самое важное отличие:',
+            answerType: ActionType.text,
+          }],
+      },
+      {
+        id: 'request',
+        name: 'Запрос',
+        questions: [
+          {
+            id: 'question_to_investor',
+            question: 'Давай сформулируем запрос к инвестору',
+            answerType: ActionType.selectMultiple,
+            payload: {
+              title: 'Запрос',
+              btnText: 'Указать',
+              withOwnOption: true,
+              options: [{
+                value: 'money',
+                title: 'Инвестиции деньгами',
+              }, {
+                value: 'expertise',
+                title: 'Инвестиции экспертизой',
+              }, {
+                value: 'consultation',
+                title: 'Консультация',
+              }, {
+                value: 'feedback',
+                title: 'Обратная связь',
+              }, {
+                value: 'strategic_partner',
+                title: 'Стратегическое партнёрство',
+              }],
+            },
+          },
+          {
+            id: 'money',
+            question: 'Супер! Давай уточним запрос, укажи сумму и и то, на что пойдут эти деньги.',
+            answerType: ActionType.objectArray,
+            payload: {
+              title: 'Запрос: инвестиции деньгами',
+              description: 'Уточни запрос, указав нужную сумму и то, на что пойдут эти деньги.',
+              itemName: 'Запрос',
+              btnText: 'Указать',
+
+              objectFields: [{
+                name: 'sum',
+                label: 'Сумма',
+                placeholder: 'Сумму печатать тут',
+                type: ActionType.text,
+              }, {
+                name: 'goal',
+                label: 'Цель',
+                placeholder: 'Цель печатать тут',
+                type: ActionType.text,
+              }],
+            },
+          },
+        ],
+      },
+      {
+        id: 'business_model',
+        name: 'Бизнес-модель',
+        questions: [
+          {
+            id: 'promotion_types',
+            question: 'Теперь мы должны рассказать инвестору какая у тебя будет бизнес модель. Укажи канал продвижения:',
+            answerType: ActionType.selectMultiple,
+            payload: {
+              title: 'Канал продвижения',
+              btnText: 'Указать',
+              withOwnOption: true,
+              options: [{
+                value: 'target',
+                title: 'Таргет',
+              }, {
+                value: 'community',
+                title: 'Посев в комьюнити',
+              }, {
+                value: 'content_marketing',
+                title: 'Контент-маркетинг',
+              }, {
+                value: 'influencers',
+                title: 'Лидеры мнений',
+              }],
+            },
+          },
+          {
+            id: 'monetization',
+            question: 'Укажи тип монетизации:',
+            answerType: ActionType.selectMultiple,
+            payload: {
+              title: 'Тип монетизации',
+              btnText: 'Указать',
+              withOwnOption: true,
+              options: [{
+                value: 'subscription',
+                title: 'Подписная',
+              }, {
+                value: 'free',
+                title: 'Условно бесплатная',
+              }, {
+                value: 'content',
+                title: 'Контентная',
+              }, {
+                value: 'agent',
+                title: 'Агентская',
+              }, {
+                value: 'add',
+                title: 'Рекламная',
+              }],
+            },
+          },
+          {
+            id: 'tariffs',
+            question: 'Укажи варианты тарифов',
+            answerType: ActionType.objectArray,
+            payload: {
+              title: 'Варианты тарифов',
+              description: 'Чтобы добавить тариф, нажми соответствующую кнопку :)',
+              itemName: 'Тариф',
+              btnText: 'Указать варианты тарифов',
+
+              objectFields: [{
+                name: 'name',
+                label: 'Название',
+                placeholder: 'Название печатать тут',
+                type: ActionType.text,
+              }, {
+                name: 'description',
+                label: 'Описание',
+                placeholder: 'Условие печатать тут',
+                type: ActionType.text,
+              }],
+            },
+          },
+          {
+            id: 'focus',
+            question: 'Какой фокус, на текушем этапе?',
+            answerType: ActionType.text,
+          },
+        ],
+      },
+      {
+        id: 'team',
+        name: 'Команда',
+        questions: [
+          {
+            id: 'members',
+            question: 'Теперь давай расскажем о команде проекта.',
+            answerType: ActionType.objectArray,
+            payload: {
+              title: 'Команда',
+              description: 'Укажи всех ключевых участников презентуемого проекта:',
+              itemName: 'Участник',
+              btnText: 'Рассказать',
+
+              objectFields: [{
+                name: 'name',
+                label: 'ФИО',
+                placeholder: 'ФИО печатать тут',
+                type: ActionType.text,
+              }, {
+                name: 'role',
+                label: 'Роль/Специализация',
+                placeholder: 'Роль/Специализацию тут',
+                type: ActionType.text,
+              }, {
+                name: 'experience',
+                label: 'Опыт',
+                placeholder: 'Опыт/пояснение/описание здесь',
+                type: ActionType.text,
+              }, {
+                name: 'image',
+                type: ActionType.image,
+              }],
+            },
+          },
+        ],
       },
     ],
   },

@@ -157,6 +157,10 @@ const SaveBtn = styled(Button)`
   }
 `;
 
+Yup.addMethod(Yup.array, 'unique', function (message, mapper = (a) => a) {
+  return this.test('unique', message, (list) => list.length === new Set(list.map(mapper)).size);
+});
+
 function TextArrayActionBlock({ actionName, onChange, payload }) {
   const [open, setOpen] = useState(false);
 
@@ -165,7 +169,12 @@ function TextArrayActionBlock({ actionName, onChange, payload }) {
       items: new Array(payload.minElements || 1).fill(''),
     },
     validationSchema: Yup.object().shape({
-      items: Yup.array().of(Yup.string().required('Обязательное поле')).min(1).required('Обязательное поле'),
+      items: Yup
+        .array()
+        .of(Yup.string().required('Обязательное поле'))
+        .unique('Поля не должны быть одинаковыми')
+        .min(1)
+        .required('Обязательное поле'),
     }),
     onSubmit: (values) => {
       onChange({ [actionName]: values.items });
@@ -234,7 +243,7 @@ function TextArrayActionBlock({ actionName, onChange, payload }) {
                                 </IconButton>
                               ) : null}
                             </InputWrap>
-                            <ErrorBlock name={`items.${index}`} />
+                            <ErrorBlock value={formik.errors.items} name={`items.${index}`} />
                           </div>
                         </Item>
                       ))}
@@ -242,6 +251,7 @@ function TextArrayActionBlock({ actionName, onChange, payload }) {
                   </Content>
 
                   <DividerGrey />
+                  <ErrorBlock value={formik.errors.items} type="form" name="items" />
 
                   <ButtonWrap>
                     <Button color="secondary" onClick={() => arrayHelpers.push('')}>Добавить пункт</Button>

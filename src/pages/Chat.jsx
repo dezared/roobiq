@@ -144,6 +144,7 @@ function Chat() {
           <ActionBlock
             actionType={currentQuestion.answerType}
             actionName={currentQuestion.id}
+            answers={answers}
             onChange={onActionChange}
             payload={currentQuestion.payload}
           />

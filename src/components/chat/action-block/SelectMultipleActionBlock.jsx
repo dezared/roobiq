@@ -100,20 +100,44 @@ const ActionButton = styled(Button)`
   width: 100%;
 `;
 
+const OwnOptionTextInput = styled(TextInput)`
+  width: 100%;
+  
+  &.MuiTextField-root {
+    margin-bottom: 16px;
+  }
+`;
+
 // eslint-disable-next-line react/prop-types
 function SelectMultipleActionBlock({ actionName, onChange, payload }) {
   const [open, setOpen] = useState(false);
 
+  const onOpen = useCallback(() => {
+    setOpen(true);
+  }, [setOpen]);
+
+  const onClose = useCallback(() => {
+    setOpen(false);
+  }, [setOpen]);
+
   const formik = useFormik({
     initialValues: {
+      ownOption: '',
       items: [],
     },
     validationSchema: Yup.object().shape({
       items: Yup.array().min(1, 'Выберете хотя бы 1 пункт').required('Обязательное поле'),
     }),
     onSubmit: (values) => {
-      onChange({ [actionName]: values.items });
+      const newValues = [...values.items];
+
+      if (values.ownOption) {
+        newValues.unshift(values.ownOption);
+      }
+
+      onChange({ [actionName]: newValues });
       formik.resetForm();
+      onClose();
     },
   });
 
@@ -121,14 +145,6 @@ function SelectMultipleActionBlock({ actionName, onChange, payload }) {
     e.preventDefault();
     formik.handleSubmit();
   }, [formik]);
-
-  const onOpen = useCallback((e) => {
-    setOpen(true);
-  }, [setOpen]);
-
-  const onClose = useCallback((e) => {
-    setOpen(false);
-  }, [setOpen]);
 
   const handleChange = useCallback((e, value) => {
     const arr = [...formik.values.items];
@@ -160,9 +176,17 @@ function SelectMultipleActionBlock({ actionName, onChange, payload }) {
               </svg>
             </IconButton>
           </Header>
+          {payload.withOwnOption ? (
+            <OwnOptionTextInput
+              placeholder="Свой вариант"
+              name="ownOption"
+              value={formik.values.ownOption}
+              onChange={formik.handleChange}
+            />
+          ) : null}
           <Content>
             {payload.options.map((option) => (
-              <CheckboxWrap key={option.value}>
+              <CheckboxWrap key={option.title}>
                 <Checkbox
                   checkedIcon={(
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -174,8 +198,8 @@ function SelectMultipleActionBlock({ actionName, onChange, payload }) {
                       <circle cx="8" cy="8" r="7.5" stroke="#8B8F94" />
                     </svg>
                   )}
-                  checked={formik.values.items.includes(option.value)}
-                  onChange={(e) => handleChange(e, option.value)}
+                  checked={formik.values.items.includes(option.title)}
+                  onChange={(e) => handleChange(e, option.title)}
                 />
                 <CheckboxLabel>
                   <CheckboxTitle>{option.title}</CheckboxTitle>
