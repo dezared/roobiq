@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable no-return-assign */
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import TabIcon from './Tabs';
@@ -20,18 +21,30 @@ const TabCont = styled.div`
   }
 `;
 
-function TabsContainer({ tabs }) {
+function TabsContainer({ tabs, currentIndex }) {
+  const elRefs = React.useRef([]);
+
+  useEffect(() => {
+    elRefs.current[currentIndex + 1].scrollIntoView();
+  }, [currentIndex]);
+
   return (
     <TabCont>
       {tabs.map((tab, index) => (
-        <TabIcon status={tab.status} index={index} key={tab.id}>{tab.children}</TabIcon>
+        <TabIcon
+          ref={(el) => elRefs.current[index] = el}
+          status={tab.status}
+          index={index}
+          key={tab.id}
+        >
+          {tab.children}
+        </TabIcon>
       ))}
     </TabCont>
   );
 }
 
 TabsContainer.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
   tabs: PropTypes.array,
 };
 

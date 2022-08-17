@@ -138,7 +138,7 @@ function Chat() {
   return (
     <Wrap>
       <Content>
-        <TabsContainer tabs={tabs} />
+        <TabsContainer tabs={tabs} currentIndex={stepIndex} />
         <ChatBlock chat={chat} />
         {currentQuestion ? (
           <ActionBlock

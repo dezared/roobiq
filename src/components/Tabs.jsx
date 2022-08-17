@@ -44,13 +44,13 @@ const Name = styled.span`
   line-height: 14px;
 `;
 
-function TabIcon({
+const TabIcon = React.forwardRef(({
   status, children, id, index,
-}) {
+}, ref) => {
   switch (status) {
     case 'prev':
       return (
-        <PrevTab id={id} index={index}>
+        <PrevTab ref={ref} id={id} index={index}>
           <Index>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 13C6 13 9 17 9.5 17C10 17 19 7 19 7" stroke="white" strokeLinecap="round" />
@@ -61,14 +61,14 @@ function TabIcon({
       );
     case 'current':
       return (
-        <CurrentTab id={id} index={index}>
+        <CurrentTab ref={ref} id={id} index={index}>
           <Index>{index + 1}</Index>
           <Name>{children}</Name>
         </CurrentTab>
       );
     case 'next':
       return (
-        <NextTab id={id} index={index}>
+        <NextTab ref={ref} id={id} index={index}>
           <Index>{index + 1}</Index>
           <Name>{children}</Name>
         </NextTab>
@@ -76,7 +76,7 @@ function TabIcon({
     default:
       throw new Error(`Status "${status}" does not exists`);
   }
-}
+});
 
 TabIcon.propTypes = {
   status: PropTypes.string,
