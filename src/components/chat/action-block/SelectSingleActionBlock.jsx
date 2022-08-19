@@ -122,20 +122,13 @@ function SelectMultipleActionBlock({ actionName, onChange, payload }) {
 
   const formik = useFormik({
     initialValues: {
-      ownOption: '',
-      items: [],
+      item: '',
     },
     validationSchema: Yup.object().shape({
-      items: Yup.array().min(1, 'Выберете хотя бы 1 пункт').required('Обязательное поле'),
+      item: Yup.string().required('Обязательное поле'),
     }),
     onSubmit: (values) => {
-      const newValues = [...values.items];
-
-      if (values.ownOption) {
-        newValues.unshift(values.ownOption);
-      }
-
-      onChange({ [actionName]: newValues });
+      onChange({ [actionName]: values.item });
       formik.resetForm();
       onClose();
     },
@@ -147,14 +140,7 @@ function SelectMultipleActionBlock({ actionName, onChange, payload }) {
   }, [formik]);
 
   const handleChange = useCallback((e, value) => {
-    const arr = [...formik.values.items];
-    if (e.target.checked) {
-      arr.push(value);
-    } else {
-      arr.splice(arr.indexOf(value), 1);
-    }
-
-    formik.setFieldValue('items', arr);
+    formik.setFieldValue('item', value);
   }, [formik]);
 
   return (
@@ -176,14 +162,6 @@ function SelectMultipleActionBlock({ actionName, onChange, payload }) {
               </svg>
             </IconButton>
           </Header>
-          {payload.withOwnOption ? (
-            <OwnOptionTextInput
-              placeholder="Свой вариант"
-              name="ownOption"
-              value={formik.values.ownOption}
-              onChange={formik.handleChange}
-            />
-          ) : null}
           <Content>
             {payload.options.map((option) => (
               <CheckboxWrap key={option.title}>
@@ -198,7 +176,7 @@ function SelectMultipleActionBlock({ actionName, onChange, payload }) {
                       <circle cx="8" cy="8" r="7.5" stroke="#8B8F94" />
                     </svg>
                   )}
-                  checked={formik.values.items.includes(option.title)}
+                  checked={formik.values.item === option.title}
                   onChange={(e) => handleChange(e, option.title)}
                 />
                 <CheckboxLabel>
@@ -209,7 +187,7 @@ function SelectMultipleActionBlock({ actionName, onChange, payload }) {
             ))}
           </Content>
 
-          <ErrorBlock value={formik.values.items} type="form" name="items" />
+          <ErrorBlock value={formik.values.item} type="input" name="item" />
 
           <SaveButton type="submit" onClick={onSubmit}>Сохранить</SaveButton>
         </Panel>

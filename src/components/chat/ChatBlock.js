@@ -100,7 +100,11 @@ const getFieldContent = (field, item) => {
 function AnswerBlock({ answerType, answer, payload }) {
   switch (answerType) {
     case ActionType.text:
+    case ActionType.selectSingle:
       return <AnswerBackground>{answer}</AnswerBackground>;
+    case ActionType.costs:
+    case ActionType.unitEconomy:
+      return <AnswerBackground>{payload.answer}</AnswerBackground>;
     case ActionType.textArray:
       return (
         <AnswerBackground>

@@ -4,8 +4,11 @@ export const ActionType = {
   textArray: 'TextArray',
   objectArray: 'ObjectArray',
   selectMultiple: 'SelectMultiple',
+  selectSingle: 'SelectSingle',
   object: 'Object',
   image: 'Image',
+  costs: 'Costs',
+  unitEconomy: 'UnitEconomy',
 };
 
 const scenarios = [
@@ -14,6 +17,59 @@ const scenarios = [
     name: 'Привлечь инвестора',
     order: 2,
     steps: [
+      {
+        id: 'economy',
+        name: 'Экономика',
+        questions: [
+          {
+            id: 'unitEconomy',
+            question: 'Выходим на создание юнит-экономики и теперь дополним некоторые данные:',
+            answerType: ActionType.unitEconomy,
+            payload: {
+              answer: 'Готово',
+            },
+          },
+          {
+            id: 'billing_period',
+            question: 'Укажи расчетный период',
+            answerType: ActionType.selectSingle,
+            payload: {
+              title: 'Расчетный период',
+              btnText: 'Указать',
+              options: [{
+                value: 'day',
+                title: 'День',
+              }, {
+                value: 'week',
+                title: 'Неделя',
+              }, {
+                value: 'decade',
+                title: 'Декада',
+              }, {
+                value: 'month',
+                title: 'Месяц',
+              }, {
+                value: 'quarter',
+                title: 'Квартал',
+              }, {
+                value: 'half_year',
+                title: 'Полугодие',
+              }, {
+                value: 'year',
+                title: 'Год',
+              }],
+            },
+          },
+          {
+            id: 'costs',
+            question: 'Укажи издержки',
+            answerType: ActionType.costs,
+            payload: {
+              answer: 'Готово',
+            },
+          },
+        ],
+      },
       {
         id: 'project',
         name: 'Проект',
@@ -302,61 +358,6 @@ const scenarios = [
           }],
       },
       {
-        id: 'request',
-        name: 'Запрос',
-        questions: [
-          {
-            id: 'question_to_investor',
-            question: 'Давай сформулируем запрос к инвестору',
-            answerType: ActionType.selectMultiple,
-            payload: {
-              title: 'Запрос',
-              btnText: 'Указать',
-              withOwnOption: true,
-              options: [{
-                value: 'money',
-                title: 'Инвестиции деньгами',
-              }, {
-                value: 'expertise',
-                title: 'Инвестиции экспертизой',
-              }, {
-                value: 'consultation',
-                title: 'Консультация',
-              }, {
-                value: 'feedback',
-                title: 'Обратная связь',
-              }, {
-                value: 'strategic_partner',
-                title: 'Стратегическое партнёрство',
-              }],
-            },
-          },
-          {
-            id: 'money',
-            question: 'Супер! Давай уточним запрос, укажи сумму и и то, на что пойдут эти деньги.',
-            answerType: ActionType.objectArray,
-            payload: {
-              title: 'Запрос: инвестиции деньгами',
-              description: 'Уточни запрос, указав нужную сумму и то, на что пойдут эти деньги.',
-              itemName: 'Запрос',
-              btnText: 'Указать',
-
-              objectFields: [{
-                name: 'sum',
-                label: 'Сумма',
-                placeholder: 'Сумму печатать тут',
-                type: ActionType.text,
-              }, {
-                name: 'goal',
-                label: 'Цель',
-                placeholder: 'Цель печатать тут',
-                type: ActionType.text,
-              }],
-            },
-          },
-        ],
-      },
-      {
         id: 'business_model',
         name: 'Бизнес-модель',
         questions: [
@@ -436,6 +437,61 @@ const scenarios = [
             id: 'focus',
             question: 'Какой фокус, на текушем этапе?',
             answerType: ActionType.text,
+          },
+        ],
+      },
+      {
+        id: 'request',
+        name: 'Запрос',
+        questions: [
+          {
+            id: 'question_to_investor',
+            question: 'Давай сформулируем запрос к инвестору',
+            answerType: ActionType.selectMultiple,
+            payload: {
+              title: 'Запрос',
+              btnText: 'Указать',
+              withOwnOption: true,
+              options: [{
+                value: 'money',
+                title: 'Инвестиции деньгами',
+              }, {
+                value: 'expertise',
+                title: 'Инвестиции экспертизой',
+              }, {
+                value: 'consultation',
+                title: 'Консультация',
+              }, {
+                value: 'feedback',
+                title: 'Обратная связь',
+              }, {
+                value: 'strategic_partner',
+                title: 'Стратегическое партнёрство',
+              }],
+            },
+          },
+          {
+            id: 'money',
+            question: 'Супер! Давай уточним запрос, укажи сумму и и то, на что пойдут эти деньги.',
+            answerType: ActionType.objectArray,
+            payload: {
+              title: 'Запрос: инвестиции деньгами',
+              description: 'Уточни запрос, указав нужную сумму и то, на что пойдут эти деньги.',
+              itemName: 'Запрос',
+              btnText: 'Указать',
+
+              objectFields: [{
+                name: 'sum',
+                label: 'Сумма',
+                placeholder: 'Сумму печатать тут',
+                type: ActionType.text,
+              }, {
+                name: 'goal',
+                label: 'Цель',
+                placeholder: 'Цель печатать тут',
+                type: ActionType.text,
+              }],
+            },
           },
         ],
       },

@@ -6,6 +6,9 @@ import TextArrayActionBlock from './TextArrayActionBlock';
 import ObjectArrayActionBlock from './ObjectArrayActionBlock';
 import SelectMultipleActionBlock from './SelectMultipleActionBlock';
 import ObjectActionBlock from './ObjectActionBlock';
+import SelectSingleActionBlock from './SelectSingleActionBlock';
+import CostsActionBlock from './CostsActionBlock';
+import UnitEconomyActionBlock from './UnitEconomyActionBlock';
 
 function ActionBlock({
   actionType, actionName, payload, onChange, answers,
@@ -32,9 +35,33 @@ function ActionBlock({
           onChange={onChange}
         />
       );
+    case ActionType.selectSingle:
+      return (
+        <SelectSingleActionBlock
+          actionName={actionName}
+          payload={payload}
+          onChange={onChange}
+        />
+      );
     case ActionType.object:
       return (
         <ObjectActionBlock
+          actionName={actionName}
+          payload={payload}
+          onChange={onChange}
+        />
+      );
+    case ActionType.costs:
+      return (
+        <CostsActionBlock
+          actionName={actionName}
+          payload={payload}
+          onChange={onChange}
+        />
+      );
+    case ActionType.unitEconomy:
+      return (
+        <UnitEconomyActionBlock
           actionName={actionName}
           payload={payload}
           onChange={onChange}
