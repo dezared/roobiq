@@ -18,59 +18,6 @@ const scenarios = [
     order: 2,
     steps: [
       {
-        id: 'economy',
-        name: 'Экономика',
-        questions: [
-          {
-            id: 'unitEconomy',
-            question: 'Выходим на создание юнит-экономики и теперь дополним некоторые данные:',
-            answerType: ActionType.unitEconomy,
-            payload: {
-              answer: 'Готово',
-            },
-          },
-          {
-            id: 'billing_period',
-            question: 'Укажи расчетный период',
-            answerType: ActionType.selectSingle,
-            payload: {
-              title: 'Расчетный период',
-              btnText: 'Указать',
-              options: [{
-                value: 'day',
-                title: 'День',
-              }, {
-                value: 'week',
-                title: 'Неделя',
-              }, {
-                value: 'decade',
-                title: 'Декада',
-              }, {
-                value: 'month',
-                title: 'Месяц',
-              }, {
-                value: 'quarter',
-                title: 'Квартал',
-              }, {
-                value: 'half_year',
-                title: 'Полугодие',
-              }, {
-                value: 'year',
-                title: 'Год',
-              }],
-            },
-          },
-          {
-            id: 'costs',
-            question: 'Укажи издержки',
-            answerType: ActionType.costs,
-            payload: {
-              answer: 'Готово',
-            },
-          },
-        ],
-      },
-      {
         id: 'project',
         name: 'Проект',
         questions: [
@@ -437,6 +384,59 @@ const scenarios = [
             id: 'focus',
             question: 'Какой фокус, на текушем этапе?',
             answerType: ActionType.text,
+          },
+        ],
+      },
+      {
+        id: 'economy',
+        name: 'Экономика',
+        questions: [
+          {
+            id: 'billing_period',
+            question: 'Укажи расчетный период',
+            answerType: ActionType.selectSingle,
+            payload: {
+              title: 'Расчетный период',
+              btnText: 'Указать',
+              options: [{
+                value: 'day',
+                title: 'День',
+              }, {
+                value: 'week',
+                title: 'Неделя',
+              }, {
+                value: 'decade',
+                title: 'Декада',
+              }, {
+                value: 'month',
+                title: 'Месяц',
+              }, {
+                value: 'quarter',
+                title: 'Квартал',
+              }, {
+                value: 'half_year',
+                title: 'Полугодие',
+              }, {
+                value: 'year',
+                title: 'Год',
+              }],
+            },
+          },
+          {
+            id: 'costs',
+            question: 'Укажи издержки',
+            answerType: ActionType.costs,
+            payload: {
+              answer: 'Готово',
+            },
+          },
+          {
+            id: 'unitEconomy',
+            question: 'Выходим на создание юнит-экономики и теперь дополним некоторые данные:',
+            answerType: ActionType.unitEconomy,
+            payload: {
+              answer: 'Готово',
+            },
           },
         ],
       },

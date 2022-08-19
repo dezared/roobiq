@@ -9,6 +9,7 @@ import {
 import * as Yup from 'yup';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { rgba } from 'polished';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import TextInput from '../../controls/TextInput';
 import Button from '../../controls/Button';
 import ErrorBlock from '../../controls/ErrorBlock';
@@ -120,6 +121,21 @@ const ItemName = styled.span`
   color: #2E3135;
 `;
 
+const Description = styled.span`
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 16px;
+  align-self: flex-start;
+  padding: 16px 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  color: #2E3135;
+`;
+
 const FieldGroup = styled.div`
   display: flex;
   flex-direction: column;
@@ -137,6 +153,14 @@ const SaveBtn = styled(Button)`
   }
 `;
 
+const DeleteIcon = styled(DeleteOutlineIcon)`
+  color: #ff1744;
+  &.MuiDivider-root {
+    width: 100%;
+    border-color: #F8F8F8;
+  }
+`;
+
 const ErrorPanel = styled.span`
   font-size: 14px;
   line-height: 16px;
@@ -144,6 +168,14 @@ const ErrorPanel = styled.span`
   padding: 6px 16px;
   color: #ff1744;
   display: block;
+`;
+
+const ButtonWrap = styled.div`
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
 `;
 
 function TrafficBlock({ onClose, data, onChange }) {
@@ -759,11 +791,12 @@ function UnitEconomyActionBlock({
   actionName, onChange,
 }) {
   const [open, setOpen] = useState(false);
-  const [data, setData] = useState({
+  const [data, setData] = useState([{
     traffic: null, expenses: null, income: null,
-  });
+  }]);
   const [error, setError] = useState(false);
   const [block, setBlock] = useState(null);
+  const [index, setIndex] = useState(null);
 
   const handleOpen = useCallback(() => {
     setOpen(true);
@@ -773,23 +806,43 @@ function UnitEconomyActionBlock({
     setOpen(false);
   }, [setOpen]);
 
-  const changeBlock = (blockName) => () => {
+  const changeBlock = (blockName, newIndex) => () => {
     setBlock(blockName);
+    setIndex(newIndex);
     setError(false);
   };
 
   const onChangeData = (partData) => {
-    setData({ ...data, ...partData });
+    const newData = [...data];
+    newData[index] = {
+      ...newData[index],
+      ...partData,
+    };
+    setData(newData);
+  };
+
+  const addItem = () => {
+    setData([...data, {
+      traffic: null, expenses: null, income: null,
+    }]);
+  };
+
+  const deleteItem = (i) => {
+    const newData = [...data];
+    newData.splice(i, 1);
+    setData(newData);
   };
 
   const onSave = useCallback(() => {
-    if (!data.traffic || !data.expenses || !data.income) {
+    const isError = data.some(({ traffic, income, expenses }) => !traffic || !expenses || !income);
+    if (isError) {
       setError(true);
       return;
     }
 
     onChange({ [actionName]: data });
     handleClose();
+    setIndex(null);
   }, [handleClose, onChange, data, actionName]);
 
   return (
@@ -808,26 +861,45 @@ function UnitEconomyActionBlock({
                 <Title>Выход на юнит экономику</Title>
               </Header>
               <ContentWrap>
-                <Content>
-                  <MenuItem checked={data.traffic !== null} onClick={changeBlock('traffic')}>
-                    <span>Трафик</span>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M5 14L11 8L5 2" stroke="#2E3135" />
-                    </svg>
-                  </MenuItem>
-                  <MenuItem checked={data.expenses !== null} onClick={changeBlock('expenses')}>
-                    <span>Расходы</span>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M5 14L11 8L5 2" stroke="#2E3135" />
-                    </svg>
-                  </MenuItem>
-                  <MenuItem checked={data.income !== null} onClick={changeBlock('income')}>
-                    <span>Доходы</span>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M5 14L11 8L5 2" stroke="#2E3135" />
-                    </svg>
-                  </MenuItem>
-                </Content>
+                {data.map((item, i) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <Fragment key={i}>
+                    <Description>
+                      <span>
+                        Вариант
+                        {' '}
+                        {i + 1}
+                      </span>
+
+                      <IconButton onClick={() => deleteItem(index)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Description>
+                    <Content>
+                      <MenuItem checked={item.traffic !== null} onClick={changeBlock('traffic', i)}>
+                        <span>Трафик</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M5 14L11 8L5 2" stroke="#2E3135" />
+                        </svg>
+                      </MenuItem>
+                      <MenuItem checked={item.expenses !== null} onClick={changeBlock('expenses', i)}>
+                        <span>Расходы</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M5 14L11 8L5 2" stroke="#2E3135" />
+                        </svg>
+                      </MenuItem>
+                      <MenuItem checked={item.income !== null} onClick={changeBlock('income', i)}>
+                        <span>Доходы</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M5 14L11 8L5 2" stroke="#2E3135" />
+                        </svg>
+                      </MenuItem>
+                    </Content>
+                  </Fragment>
+                ))}
+                <ButtonWrap>
+                  <Button color="secondary" onClick={addItem}>Добавить вариант</Button>
+                </ButtonWrap>
               </ContentWrap>
 
               <ErrorPanel>{error ? 'Введите обязательные блоки' : ''}</ErrorPanel>
@@ -837,14 +909,18 @@ function UnitEconomyActionBlock({
           ) : null}
 
           {block === 'traffic' ? (
-            <TrafficBlock onClose={changeBlock(null)} onChange={onChangeData} data={data.traffic} />
+            <TrafficBlock
+              onClose={changeBlock(null)}
+              onChange={onChangeData}
+              data={data[index].traffic}
+            />
           ) : null}
 
           {block === 'expenses' ? (
             <ExpensesBlock
               onClose={changeBlock(null)}
               onChange={onChangeData}
-              data={data.expenses}
+              data={data[index].expenses}
             />
           ) : null}
 
@@ -852,7 +928,7 @@ function UnitEconomyActionBlock({
             <IncomeBlock
               onClose={changeBlock(null)}
               onChange={onChangeData}
-              data={data.income}
+              data={data[index].income}
             />
           ) : null}
         </Container>
