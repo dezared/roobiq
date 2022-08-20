@@ -4,6 +4,15 @@ import TextInput from '../components/controls/TextInput';
 import Button from '../components/controls/Button';
 import Avatar from '../components/controls/Avatar';
 import ImagePicker from '../components/controls/ImagePicker';
+import TabsContainer from '../components/TabsContainer';
+import Slide_1 from '../components/slides/Slide1';
+import Slide_2 from '../components/slides/Slide2';
+import Slide_3 from '../components/slides/Slide3';
+//import Slide_4 from '../components/slides/Slide4';
+import Slide_5 from '../components/slides/Slide5';
+import Slide_6 from '../components/slides/Slide6';
+import Slide_9 from '../components/slides/Slide9';
+
 
 const Box = styled.div`
   padding: 30px 50px;
@@ -73,6 +82,20 @@ function Components() {
       <Row>
         <NameField>Image picker</NameField>
         <ImagePicker file={fileUrl} onChangeFile={onChangeFile} onDelete={onDelete} />
+      </Row>
+
+      <Row>
+        <TabsContainer />
+      </Row>
+
+      <Row>
+        <Slide_1 />
+        <Slide_2 />
+        <Slide_3 />
+        {/*<Slide_4 />*/}
+        <Slide_5 />
+        <Slide_6 />
+        <Slide_9 />
       </Row>
     </Box>
   );
