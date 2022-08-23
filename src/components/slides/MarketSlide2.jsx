@@ -27,9 +27,9 @@ const Title = styled.h1`
 
 const LeftTitle = styled.p`
   position: absolute;
-  left: 5.21%;
-  right: 0%;
-  bottom: 40.82%;
+  left: 4%;
+  right: 0;
+  top: 38%; 
   font-weight: 500;
   font-size: 1.5em;
   line-height: 0.8em;
@@ -38,24 +38,23 @@ const LeftTitle = styled.p`
 
 const LeftCount = styled.p`
   position: absolute;
-  left: 10%;
+  left: 4%;
   right: 4.15%;
-  top: 24.54%;
-  bottom: 0%;
+  top: 47.54%;
+  bottom: 0;
   font-weight: 500;
-  font-size: 5em;
+  font-size: 4em;
   color: #25A9E0;
 `;
 
 const LeftVal = styled.p`
   position: absolute;
-  left: 4.84%;
-  bottom: 35.56%;
+  left: 4%;
+  top: 66%;
   font-weight: 500;
-  font-size: 2em;
+  font-size: 1.8em;
   line-height: 1em;
-  text-align: right;
-  color: #FFFFFF;
+  color: #25A9E0;
 `;
 
 const Site = styled.a`
@@ -64,17 +63,18 @@ const Site = styled.a`
   bottom: 5.46%;
   font-style: normal;
   font-weight: 300;
-  font-size: 2em;
+  font-size: 0.7em;
   line-height: 3em;
+  text-decoration: none;
   color: #404041;
 `;
 
 const RightBlock = styled.div`
   position: absolute;
   left: 42.81%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
+  right: 0;
+  top: 0;
+  bottom: 0;
   background: #25A9E0;
   font-size: 3px;
 `;
@@ -115,7 +115,7 @@ const RightDescription = styled.p`
   color: #FFFFFF;
 `;
 
-function Slide_5({ title, countTitle, count, peopleVal,  site, cash, cashVal, desc }) {
+function market_slide2({ title, countTitle, count, peopleVal, site, cash, cashVal, desc }) {
   return (
     <SlideBox>
       <Title>{title}</Title>
@@ -132,7 +132,7 @@ function Slide_5({ title, countTitle, count, peopleVal,  site, cash, cashVal, de
   )
 }
 
-Slide_5.propTypes = {
+market_slide2.propTypes = {
   title: PropTypes.string,
   countTitle: PropTypes.string,
   count: PropTypes.number,
@@ -143,14 +143,15 @@ Slide_5.propTypes = {
   desc: PropTypes.string,
 }
 
-Slide_5.defaultProps = {
+market_slide2.defaultProps = {
   title: 'Market',
   countTitle: 'students',
   count: 3000,
+  peopleVal: 'Млн. человек',
   site: 'google.com',
   cash: 19.8,
   cashVal: 'billions euro',
-  desc: 'students can buy this only for one cup of coffe:)'
+  desc: 'students can buy this only for one cup of coffee:)'
 }
 
-export default Slide_5;
+export default market_slide2;

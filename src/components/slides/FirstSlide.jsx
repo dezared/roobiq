@@ -8,7 +8,6 @@ const SlideBox = styled.div`
   filter: drop-shadow(0px 2px 4px rgba(107, 115, 137, 0.2));
   //border: 2px solid brown;
   border-radius: 8px;
-  flex: none;
   order: 0;
   flex-grow: 0;
   font-size: 5px;
@@ -37,7 +36,7 @@ const Description = styled.p`
   color: #404041;
 `;
 
-function Slide_1({ title, desc }) {
+function start_Slide({ title, desc }) {
   return (
     <SlideBox>
       <Title>{ title }</Title>
@@ -46,14 +45,14 @@ function Slide_1({ title, desc }) {
   )
 }
 
-Slide_1.propTypes = {
+start_Slide.propTypes = {
   title: PropTypes.string,
   desc: PropTypes.string,
 }
 
-Slide_1.defaultProps = {
+start_Slide.defaultProps = {
   title: 'ROOBIQ',
-  desc: 'Constructor blablablablabla',
+  desc: 'Конструктор презентаций с экономическими расчетами',
 }
 
-export default Slide_1;
+export default start_Slide;

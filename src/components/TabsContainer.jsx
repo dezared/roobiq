@@ -6,7 +6,7 @@ import TabIcon from './Tabs';
 
 const TabCont = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: row;  
   align-items: flex-start;
   padding: 16px 0 16px 16px;
   gap: 12px;

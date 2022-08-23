@@ -67,12 +67,12 @@ const Description = styled.p`
 
 `;
 
-function Slide_3({ title, list, desc }) {
+function problem_slide({ title, list, desc }) {
   return (
     <SlideBox>
       <Title>{title}</Title>
       <TitleList>
-        {list.map((tit) => <TitleLi>{tit.desc} key={tit.index}</TitleLi>)}
+        {list.map((tit) => <TitleLi key={tit.index}>{tit.desc}</TitleLi>)}
       </TitleList>
       <Line/>
       <Description>{desc}</Description>
@@ -80,14 +80,14 @@ function Slide_3({ title, list, desc }) {
   )
 }
 
-Slide_3.propTypes = {
+problem_slide.propTypes = {
   title: PropTypes.string,
   desc: PropTypes.string,
   list: PropTypes.array,
 }
 
-Slide_3.defaultProps = {
-  title: 'Posledstviya',
+problem_slide.defaultProps = {
+  title: 'Problem',
   desc: 'Большинство сотрудников разного уровня и людей вообще не обладает достаточным набором навыков и компетенций для создания презентаций и тем более для создания полноценного набора материалов по проекту/стартапу. Проблемы подстерегают всюду: от правильной структуры каждого документа до необходимости искать и анализировать информацию + к этому можно добавить оформление всех материалов.',
   list: [
     {desc: 'We haven`t this skills', index: 1},
@@ -96,4 +96,4 @@ Slide_3.defaultProps = {
   ]
 }
 
-export default Slide_3;
+export default problem_slide;

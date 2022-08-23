@@ -3,6 +3,7 @@ import React, {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom' ;
 import initScenarios, { ActionType as AnswerType } from '../configs/scenarios';
 import ActionBlock from '../components/chat/action-block/ActionBlock';
 import ChatBlockComponent from '../components/chat/ChatBlock';
@@ -150,7 +151,7 @@ function Chat() {
           />
         ) : (
           <BtnGroup>
-            <Button>Смотреть</Button>
+            <Button component={Link} to='/my'>Смотреть</Button>
             <Button color="secondary" onClick={onNextTab}>Продолжить создание</Button>
           </BtnGroup>
         )}

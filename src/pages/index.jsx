@@ -83,14 +83,14 @@ function Main() {
 
        <ItemsWrap spacing={2}>
         <Item>
-            <span>Презентаци для Microsoft</span>
+            <span>Презентация для Microsoft</span>
             <div>
               <IconButton><DownloadIcon color="darkGrey" /></IconButton>
               <IconButton><DeleteIcon color="darkGrey" /></IconButton>
             </div>
         </Item>
         <Item>
-            <span>Презентаци seed round</span>
+            <span>Презентация seed round</span>
             <div>
               <IconButton><DownloadIcon color="darkGrey" /></IconButton>
               <IconButton><DeleteIcon color="darkGrey" /></IconButton>

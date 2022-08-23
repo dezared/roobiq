@@ -14,19 +14,19 @@ const SlideBox = styled.div`
   font-size: 3px;
 `;
 
-const MapConcurents = styled.h1`
+const MapCompetitors = styled.h1`
   font-size: 3em;
   position: absolute;
   top: 45%;
   color: #25A9E0;
 `;
 
-function Slide_6() {
+function splash_competitors() {
   return (
     <SlideBox>
-      <MapConcurents>Карта конкурентов</MapConcurents>
+      <MapCompetitors>Карта конкурентов</MapCompetitors>
     </SlideBox>
   )
 }
 
-export default Slide_6;
+export default splash_competitors;

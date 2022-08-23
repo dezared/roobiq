@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 
 const SlideBox = styled.div`
-  width: 117px;
-  height: 66px;
+  width: 517px;
+  height: 266px;
   filter: drop-shadow(0px 2px 4px rgba(107, 115, 137, 0.2));
-  //border: 2px solid brown;
+  border: 2px solid brown;
   border-radius: 8px;
   flex: none;
   order: 0;
@@ -28,10 +28,10 @@ const Title = styled.h1`
 
 const LeftBlock = styled.div`
   position: absolute;
-  width: 35px;
-  height: 26px;
-  left: 0px;
-  top: 20px;
+  width: 35%;
+  height: 40%;
+  left: 0;
+  top: 39.6%;
   background: #25A9E0;
   font-size: 4px;
   display: flex;
@@ -56,7 +56,7 @@ const TitleList = styled.ul`
   bottom: 26.76%;
   list-style-type: disc;
   list-style-position: inside;
-  font-size: 2px;
+  font-size: 15px;
 `;
 
 const TitleLi = styled.li`
@@ -67,7 +67,7 @@ const TitleLi = styled.li`
 
 `;
 
-function Slide_2({ title, leftTitle, titleList }) {
+function audit_slide({ title, leftTitle, titleList }) {
   return (
     <SlideBox>
       <Title>{ title }</Title>
@@ -85,13 +85,13 @@ function Slide_2({ title, leftTitle, titleList }) {
   )
 }
 
-Slide_2.propTypes = {
+audit_slide.propTypes = {
   title: PropTypes.string,
   leftTitle: PropTypes.string,
   titleList: PropTypes.array,
 }
 
-Slide_2.defaultProps = {
+audit_slide.defaultProps = {
   title: 'Posledstviya',
   leftTitle: 'Bad presentations',
   titleList: [
@@ -101,4 +101,4 @@ Slide_2.defaultProps = {
   ],
 }
 
-export default Slide_2;
+export default audit_slide;
