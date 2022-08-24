@@ -11,7 +11,6 @@ import Main from '../pages/index';
 import Chat from '../pages/Chat';
 import ScenarioSelection from '../pages/ScenarioSelection';
 import MyPage from '../pages/MyPage';
-import Slides from '../pages/SlidesPage'
 
 function RouterNavigator() {
   return (
@@ -25,7 +24,6 @@ function RouterNavigator() {
         <Route path="/ad" exact>ad</Route>
         <Route path="/components" exact><Components /></Route>
         <Route path='/my' exact><MyPage /></Route>
-        <Route path='/slides' exact><Slides /></Route>
         <Route><p>404 not found</p></Route>
       </Switch>
     </Router>

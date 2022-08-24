@@ -67,7 +67,7 @@ const TitleLi = styled.li`
 
 `;
 
-function audit_slide({ title, leftTitle, titleList }) {
+function audit({ title, leftTitle, titleList }) {
   return (
     <SlideBox>
       <Title>{ title }</Title>
@@ -85,13 +85,13 @@ function audit_slide({ title, leftTitle, titleList }) {
   )
 }
 
-audit_slide.propTypes = {
+audit.propTypes = {
   title: PropTypes.string,
   leftTitle: PropTypes.string,
   titleList: PropTypes.array,
 }
 
-audit_slide.defaultProps = {
+audit.defaultProps = {
   title: 'Posledstviya',
   leftTitle: 'Bad presentations',
   titleList: [
@@ -99,6 +99,6 @@ audit_slide.defaultProps = {
     {desc: 'We haven`t this skills 2', index: 2},
     {desc: 'We haven`t this skills 3', index: 3},
   ],
-}
+};
 
-export default audit_slide;
+export default audit;
