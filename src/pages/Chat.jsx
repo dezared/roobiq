@@ -9,6 +9,8 @@ import ActionBlock from '../components/chat/action-block/ActionBlock';
 import ChatBlockComponent from '../components/chat/ChatBlock';
 import Button from '../components/controls/Button';
 import TabsContainer from '../components/TabsContainer';
+import Modal from '@mui/material/Modal';
+import MyPage from '../pages/MyPage'
 
 const Wrap = styled.div`
   width: 100%;
@@ -136,6 +138,14 @@ function Chat() {
     setAnswers({});
   };
 
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handleChange = () => {
+    setOpen(!open)
+ }
+
   return (
     <Wrap>
       <Content>
@@ -150,10 +160,20 @@ function Chat() {
             payload={currentQuestion.payload}
           />
         ) : (
-          <BtnGroup>
-            <Button component={Link} to='/my'>Смотреть</Button>
-            <Button color="secondary" onClick={onNextTab}>Продолжить создание</Button>
-          </BtnGroup>
+          <div>
+            <BtnGroup>
+              <Button onClick={handleOpen}>Смотреть</Button>
+              <Button color="secondary" onClick={onNextTab}>Продолжить создание</Button>
+            </BtnGroup>
+            <Modal
+              open={open}
+              onClose={handleClose}
+            >
+              <div>
+                <MyPage handleChange={handleChange}></MyPage>
+              </div>
+            </Modal>
+          </div>
         )}
 
       </Content>

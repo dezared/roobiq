@@ -13,6 +13,7 @@ export const ActionType = {
 
 const scenarios = [
   {
+    numId: 1,
     id: 'get_investments',
     name: 'Привлечь инвестора',
     order: 2,
@@ -535,6 +536,7 @@ const scenarios = [
     ],
   },
   {
+    numId: 2,
     id: 'find_team',
     name: 'Привлечь команду',
     order: 1,

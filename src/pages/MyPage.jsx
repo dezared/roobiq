@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../components/controls/Button';
-import ProblSlide from '../components/slides/ProblemSlide';
+import ConcurentsAndAlternatives from '../components/slides/ConcurentsAndAlternatives';
 import SlidesCont from "../components/SlidesContainer";
 
 
@@ -13,6 +13,7 @@ const Wrap = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 16px 16px 40px;
+  background: white;
 `;
 
 const Content = styled.div`
@@ -61,16 +62,16 @@ const MyButton = styled(Button)`
   position: absolute;
 `;
 
-function MyPage() {
+function MyPage({ handleChange }) {
   return (
     <Wrap>
       <Content>
         <Title>Презентация по итогу одной из секций</Title>
         <Window>
-          <ProblSlide />
+          <ConcurentsAndAlternatives />
         </Window>
         <SlidesCont />
-          <MyButton component={Link} to='/constructor' >Вернуться к созданию</MyButton>
+          <MyButton onClick={handleChange}>Вернуться к созданию</MyButton>
       </Content>
     </Wrap>
   )

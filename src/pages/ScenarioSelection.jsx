@@ -50,8 +50,8 @@ function ScenarioSelection() {
   const scenarios = useMemo(() => initScenarios, []);
   const history = useHistory();
 
-  const onChooseScenario = () => () => {
-    history.push(`/constructor/${1}`);
+  const onChooseScenario = (scenarioId) => () => {
+    history.push(`/constructor/${scenarioId}`);
   };
 
   return (
@@ -68,7 +68,7 @@ function ScenarioSelection() {
         {scenarios?.map((item) => (
           <ListItemButton
             key={item.id}
-            onClick={onChooseScenario(item.id)}
+            onClick={onChooseScenario(item.numId)}
           >
             {item.name}
           </ListItemButton>

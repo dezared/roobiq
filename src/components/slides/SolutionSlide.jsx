@@ -73,7 +73,7 @@ const SolutionItemLi = styled.li`
   color: #fff;
 `;
 
-function solution_slide({ title, solutionList }) {
+function SolutiuonSlide({ title, solutionList }) {
   return (
     <SlideBox>
       <Title>{title}</Title>
@@ -83,7 +83,7 @@ function solution_slide({ title, solutionList }) {
             <SolutionItemIcon>{Sl.SolutionItemIcon}</SolutionItemIcon>
             <SolutionItemTitle>{Sl.SolutionItemTitle}</SolutionItemTitle>
             <SolutionItemList>
-              {Sl.map((solLi) => <SolutionItemLi key={solLi.SolutionItemList.index}>{solLi.SolutionItemList.desc}</SolutionItemLi>)}
+              {Sl.SolutionItemList.map((solLi) => <SolutionItemLi key={solLi.index}>{solLi.desc}</SolutionItemLi>)}
             </SolutionItemList>
           </SolutionItem>
         ))}
@@ -92,11 +92,11 @@ function solution_slide({ title, solutionList }) {
   );
 }
 
-solution_slide.propTypes = {
+SolutiuonSlide.propTypes = {
   title: PropTypes.string,
   solutionList: PropTypes.array,
 };
-solution_slide.defaultProps = {
+SolutiuonSlide.defaultProps = {
   title: 'Solution and product',
   solutionList: [
     {
@@ -156,4 +156,4 @@ solution_slide.defaultProps = {
   ],
 };
 
-export default solution_slide;
+export default SolutiuonSlide;
