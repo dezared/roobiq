@@ -6,6 +6,9 @@ import logoStartPage from '../images/splash_logotype.png';
 import TextInput from '../components/controls/TextInput';
 import Button from '../components/controls/Button';
 import { registrationValidationSchema } from '../configs/validations';
+import { useHistory } from 'react-router-dom';
+
+import AuthService from '../utils/auth/AuthorizationService';
 
 const Wrap = styled.div`
   width: 100%;
@@ -69,6 +72,7 @@ const RegistrationBtn = styled(Button)`
 `;
 
 function Login() {
+  const history = useHistory();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -77,7 +81,20 @@ function Login() {
     },
     validationSchema: registrationValidationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      AuthService.register(values.email, values.password, values.passwordConfirmation).then(
+        (response) => {
+          console.log(response);
+          localStorage.setItem("userAuthorizationToken", JSON.stringify(response.data));
+          history.push("/");
+          //window.location.reload();
+          return Promise.resolve();
+        },
+        (error) => {
+          console.log(error)
+          // регистрация не все ок
+          return Promise.reject();
+        }
+      );
     },
   });
 
