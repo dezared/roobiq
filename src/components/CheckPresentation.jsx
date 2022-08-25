@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Button from '../components/controls/Button';
-import ConcurentsAndAlternatives from '../components/slides/ConcurentsAndAlternatives';
-import SlidesCont from "../components/SlidesContainer";
+import Button from './controls/Button';
+import BuisnesModel from './slides/BuisnesModel';
+import SlidesCont from "./SlidesContainer";
 
 
 const Wrap = styled.div`
@@ -23,6 +22,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 5px;
 `;
 
 const Title = styled.h1`
@@ -62,13 +62,13 @@ const MyButton = styled(Button)`
   position: absolute;
 `;
 
-function MyPage({ handleChange }) {
+function CheckPresentation({ handleChange }) {
   return (
     <Wrap>
       <Content>
         <Title>Презентация по итогу одной из секций</Title>
         <Window>
-          <ConcurentsAndAlternatives />
+          <BuisnesModel />
         </Window>
         <SlidesCont />
           <MyButton onClick={handleChange}>Вернуться к созданию</MyButton>
@@ -77,4 +77,4 @@ function MyPage({ handleChange }) {
   )
 }
 
-export default MyPage;
+export default CheckPresentation;

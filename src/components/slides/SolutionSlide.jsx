@@ -7,7 +7,6 @@ const SlideBox = styled.div`
   height: 66px;
   filter: drop-shadow(0px 2px 4px rgba(107, 115, 137, 0.2));
   background: #25A9E0;
-  //border: 2px solid brown;
   border-radius: 8px;
   flex: none;
   order: 0;
@@ -73,7 +72,7 @@ const SolutionItemLi = styled.li`
   color: #fff;
 `;
 
-function SolutiuonSlide({ title, solutionList }) {
+function SolutionSlide({ title, solutionList }) {
   return (
     <SlideBox>
       <Title>{title}</Title>
@@ -92,11 +91,11 @@ function SolutiuonSlide({ title, solutionList }) {
   );
 }
 
-SolutiuonSlide.propTypes = {
+SolutionSlide.propTypes = {
   title: PropTypes.string,
   solutionList: PropTypes.array,
 };
-SolutiuonSlide.defaultProps = {
+SolutionSlide.defaultProps = {
   title: 'Solution and product',
   solutionList: [
     {
@@ -156,4 +155,4 @@ SolutiuonSlide.defaultProps = {
   ],
 };
 
-export default SolutiuonSlide;
+export default SolutionSlide;

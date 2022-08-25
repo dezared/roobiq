@@ -6,7 +6,6 @@ const SlideBox = styled.div`
   width: 117px;
   height: 66px;
   filter: drop-shadow(0px 2px 4px rgba(107, 115, 137, 0.2));
-  border: 2px solid brown;
   border-radius: 8px;
   order: 0;
   flex-grow: 0;
@@ -27,7 +26,7 @@ const Difference = styled.p`
   background: #25A9E0;
 `;
 
-function difference_slide( { solution } ) {
+function DifferenceSlide( { solution } ) {
   return (
     <SlideBox>
       <Difference>{solution}</Difference>
@@ -35,14 +34,14 @@ function difference_slide( { solution } ) {
   )
 }
 
-difference_slide.propTypes = {
+DifferenceSlide.propTypes = {
   solution: PropTypes.string,
 }
 
-difference_slide.defaultProps = {
+DifferenceSlide.defaultProps = {
   solution: `
     В отличии от текущих решений потенциальных конкурентов или заменителей, в конечном итоге мы планируем создать сервис, которой позволит пользователям моделировать свой проект: создать презентацию, посчитать экономику, проанализировать конкурентов, сформировать бизнес модель, сформировать отчётные материалы и потренировать навыки презентации, выступлений и переговоров.
   `
 }
 
-export default difference_slide;
+export default DifferenceSlide;

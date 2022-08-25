@@ -4,15 +4,14 @@ import PropTypes from 'prop-types';
 
 
 const SlideBox = styled.div`
-  width: 517px;
-  height: 266px;
+  width: 100%;
+  height: 100%;
   filter: drop-shadow(0px 2px 4px rgba(107, 115, 137, 0.2));
-  border: 2px solid brown;
   border-radius: 8px;
   flex: none;
   order: 0;
   flex-grow: 0;
-  font-size: 3px;
+  font-size: 1em;
 `;
 
 const Title = styled.h1`
@@ -28,80 +27,147 @@ const Title = styled.h1`
 
 const HeadCont = styled.div`
   position: absolute;
+  top: 20%;
+  width: 100%;
+  height: 10%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  
 `;
 
 const Head = styled.p`
   background: #25A9E0;
   color: #fff;
-  height: 3em;
   width: calc((100% / 3) - 0.2em);
   font-size: 1.5em;
   font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
 `;
 
 const ListCont = styled.div`
-  top: 33%;
-  left: 5%;
+  width: 100%;
+  height: 60%;
+  position: absolute;
+  top: 36%;
+  left: 5%; 
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  font-size: 1.2em;
+  gap: 8%;
+  //text-align: left;
 `;
 
-const PropList = styled.ul`
-  position: absolute;
-  width: calc((100%/3) - 0.5em);
-  top: 3%;
+const ListItems = styled.ul`
+  width: 25%;
+  height: 100%;
   list-style-type: disc;
-  list-style-position: inside;
-  font-size: 1em;  
-`;
-
-const PropLi = styled.li`
+  color: #25A9E0; 
   font-size: 1em;
-  line-height: 1.2em;
-  color: black;
-  font-weight: 300;
+  align-items: flex-start;
 `;
 
-function buisnes_slide({ title, heads }) {
+const ListItemsLi = styled.li`
+  width: 100%;
+  font-weight: 200;
+  font-size: 1.4em;
+  line-height: 2em;
+  color: #000;
+`;
+
+const BottomBlock = styled.div`
+  width: 100%;
+  height: 20%;
+  position: absolute;
+  top: 80%;
+  font-size: 1em;
+  background: #25A9E0;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+`;
+
+const BottomContentTitle = styled.h1`
+  position: absolute;
+  top: 35%;
+  left: 5%;
+  font-size: 1.5em;
+  font-weight: 400;
+  color: white;
+`;
+
+const BottomContentText = styled.span`
+  position: absolute;
+  top: 65%;
+  left: 5%;
+  font-size: 1em;
+  font-weight: 200;
+  color: white;
+`;
+
+const UserFocus = styled.span`
+  font-size: 1em;
+  font-weight: 300;
+  font-style: italic;
+`;
+
+function BuisnesModel({ title, headers, customers, movement, money, focus }) {
   return (
-    <Slide_box>
+    <SlideBox>
       <Title>{title}</Title>
       <HeadCont>
-        {heads.map((head) => <Head>{head.title}</Head>)}
+        {headers.map((head) => <Head>{head}</Head>)}
       </HeadCont>
       <ListCont>
-        {heads.map((head) =>
-        <PropList>
-          {head.map((h) => {h.list.map((li) => <PropLi>{li}</PropLi>)})}
-        </PropList>
-        )}
+        <ListItems>
+          {customers.map((customer) => <ListItemsLi key={customer}>{customer}</ListItemsLi>)}
+        </ListItems>
+        <ListItems>
+          {movement.map((step) => <ListItemsLi key={step}>{step}</ListItemsLi>)}
+        </ListItems>
+        <ListItems>
+          {money.map((coin) => <ListItemsLi key={coin}>{coin}</ListItemsLi>)}
+        </ListItems>
       </ListCont>
-    </Slide_box>
+      <BottomBlock>
+        <BottomContentTitle>Фокус:</BottomContentTitle>
+        <BottomContentText>На текущем этапе фокус на <UserFocus>{focus}</UserFocus></BottomContentText>
+      </BottomBlock>
+    </SlideBox>
   )
 }
 
-buisnes_slide.propTypes = {
+BuisnesModel.propTypes = {
   title: PropTypes.string,
-  heads: PropTypes.array,
+  focus: PropTypes.string,
+  headers: PropTypes.array,
+  customers: PropTypes.array,
+  movement: PropTypes.array,
+  money: PropTypes.array,
 }
 
-buisnes_slide.defaultProps = {
+BuisnesModel.defaultProps = {
   title: 'Бизнес-модель',
-  heads: [
-    {
-      title: 'Клиенты',
-      list: [
-        'Студенты',
-        'Начинающие и серийные стартаперы',
-        'Преподаватели в школах и их ученики',
-      ]
-    }
-  ]
+  focus: 'Product-Market Fit',
+  headers: [
+    'Клиент:',
+    'Продвижение:',
+    'Монетизация:',
+  ],
+  customers: [
+    'Студенты',
+    'Начинающие стартаперы',
+    'Преподаватели в школах и их ученики',
+  ],
+  movement: [
+    'Посев в комьюнити',
+    'Контент-маркетинг',
+  ],
+  money: [
+    'Пробный период 7 дней',
+    'Студенческий: 200 рублей/мес.',
+  ],
 }
 
-export default buisnes_slide;
+export default BuisnesModel;

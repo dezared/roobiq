@@ -6,7 +6,6 @@ const SlideBox = styled.div`
   width: 117px;
   height: 66px;
   filter: drop-shadow(0px 2px 4px rgba(107, 115, 137, 0.2));
-  border: 2px solid brown;
   border-radius: 8px;
   flex: none;
   order: 0;
@@ -115,7 +114,7 @@ const RightDescription = styled.p`
   color: #FFFFFF;
 `;
 
-function market_slide2({ title, countTitle, count, peopleVal, site, cash, cashVal, desc }) {
+function MarketSlide2({ title, countTitle, count, peopleVal, site, cash, cashVal, desc }) {
   return (
     <SlideBox>
       <Title>{title}</Title>
@@ -132,7 +131,7 @@ function market_slide2({ title, countTitle, count, peopleVal, site, cash, cashVa
   )
 }
 
-market_slide2.propTypes = {
+MarketSlide2.propTypes = {
   title: PropTypes.string,
   countTitle: PropTypes.string,
   count: PropTypes.number,
@@ -143,7 +142,7 @@ market_slide2.propTypes = {
   desc: PropTypes.string,
 }
 
-market_slide2.defaultProps = {
+MarketSlide2.defaultProps = {
   title: 'Market',
   countTitle: 'students',
   count: 3000,
@@ -154,4 +153,4 @@ market_slide2.defaultProps = {
   desc: 'students can buy this only for one cup of coffee:)'
 }
 
-export default market_slide2;
+export default MarketSlide2;

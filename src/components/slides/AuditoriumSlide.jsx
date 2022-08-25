@@ -7,7 +7,6 @@ const SlideBox = styled.div`
   width: 517px;
   height: 266px;
   filter: drop-shadow(0px 2px 4px rgba(107, 115, 137, 0.2));
-  border: 2px solid brown;
   border-radius: 8px;
   flex: none;
   order: 0;
@@ -22,7 +21,7 @@ const Title = styled.h1`
   top: 9.26%;
   bottom: 78.89%;
   font-weight: 500;
-  font-size: 2em;
+  font-size: 2em; 
   color: #25A9E0;
 `;
 
@@ -67,7 +66,7 @@ const TitleLi = styled.li`
 
 `;
 
-function audit({ title, leftTitle, titleList }) {
+function AuditoriumSlide({ title, leftTitle, titleList }) {
   return (
     <SlideBox>
       <Title>{ title }</Title>
@@ -85,15 +84,15 @@ function audit({ title, leftTitle, titleList }) {
   )
 }
 
-audit.propTypes = {
+AuditoriumSlide.propTypes = {
   title: PropTypes.string,
   leftTitle: PropTypes.string,
   titleList: PropTypes.array,
 }
 
-audit.defaultProps = {
-  title: 'Posledstviya',
-  leftTitle: 'Bad presentations',
+AuditoriumSlide.defaultProps = {
+  title: 'Последствия',
+  leftTitle: 'Плохие презентации',
   titleList: [
     {desc: 'We haven`t this skills', index: 1},
     {desc: 'We haven`t this skills 2', index: 2},
@@ -101,4 +100,4 @@ audit.defaultProps = {
   ],
 };
 
-export default audit;
+export default AuditoriumSlide;

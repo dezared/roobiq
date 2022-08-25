@@ -10,7 +10,7 @@ import ChatBlockComponent from '../components/chat/ChatBlock';
 import Button from '../components/controls/Button';
 import TabsContainer from '../components/TabsContainer';
 import Modal from '@mui/material/Modal';
-import MyPage from '../pages/MyPage'
+import CheckPresentation from '../components/CheckPresentation'
 
 const Wrap = styled.div`
   width: 100%;
@@ -170,7 +170,7 @@ function Chat() {
               onClose={handleClose}
             >
               <div>
-                <MyPage handleChange={handleChange}></MyPage>
+                <CheckPresentation handleChange={handleChange}></CheckPresentation>
               </div>
             </Modal>
           </div>

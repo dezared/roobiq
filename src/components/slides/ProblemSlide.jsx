@@ -6,7 +6,6 @@ const SlideBox = styled.div`
   width: 117px;
   height: 66px;
   filter: drop-shadow(0px 2px 4px rgba(107, 115, 137, 0.2));
-  border: 2px solid brown;
   border-radius: 8px;
   flex: none;
   order: 0;
@@ -67,7 +66,7 @@ const Description = styled.p`
 
 `;
 
-function ProblSlide({ title, list, desc }) {
+function ProblemSlide({ title, list, desc }) {
   return (
     <SlideBox>
       <Title>{title}</Title>
@@ -80,13 +79,13 @@ function ProblSlide({ title, list, desc }) {
   )
 }
 
-ProblSlide.propTypes = {
+ProblemSlide.propTypes = {
   title: PropTypes.string,
   desc: PropTypes.string,
   list: PropTypes.array,
 }
 
-ProblSlide.defaultProps = {
+ProblemSlide.defaultProps = {
   title: 'Problem',
   desc: 'Большинство сотрудников разного уровня и людей вообще не обладает достаточным набором навыков и компетенций для создания презентаций и тем более для создания полноценного набора материалов по проекту/стартапу. Проблемы подстерегают всюду: от правильной структуры каждого документа до необходимости искать и анализировать информацию + к этому можно добавить оформление всех материалов.',
   list: [
@@ -96,4 +95,4 @@ ProblSlide.defaultProps = {
   ]
 }
 
-export default ProblSlide;
+export default ProblemSlide;

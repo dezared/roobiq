@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+//import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@mui/material/Paper'
@@ -9,15 +9,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
-function ConcurentsAndAlternatives({ title, massive, concurents, properties }) {
-    console.log(concurents)
+function CompetitorsAndAlternatives({ title, massive, competitors, properties }) {
+    console.log(competitors)
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell></TableCell>
-            {concurents.map((concurent) => <TableCell key={concurent}>{concurent}</TableCell>)}
+            {competitors.map((competitor) => <TableCell key={competitor}>{competitor}</TableCell>)}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -36,16 +36,16 @@ function ConcurentsAndAlternatives({ title, massive, concurents, properties }) {
   )
 }
 
-ConcurentsAndAlternatives.propTypes = {
+CompetitorsAndAlternatives.propTypes = {
   title: PropTypes.string,
   massive: PropTypes.array,
-  concurents: PropTypes.array,
+  competitors: PropTypes.array,
   properties: PropTypes.array
 }
 
-ConcurentsAndAlternatives.defaultProps = {
+CompetitorsAndAlternatives.defaultProps = {
   title: 'Бизнес-модель',
-  concurents: [
+  competitors: [
     "1",
     "2",
     "3"
@@ -55,7 +55,6 @@ ConcurentsAndAlternatives.defaultProps = {
     "cal2",
     "cal3"
   ],
-  title: 'Клиенты',
   massive: [
     [ // x
         { // y
@@ -111,4 +110,4 @@ ConcurentsAndAlternatives.defaultProps = {
   ]
 }
 
-export default ConcurentsAndAlternatives;
+export default CompetitorsAndAlternatives;
