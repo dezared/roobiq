@@ -12,6 +12,13 @@ class AuthService {
         headers: AuthBarier()
       });
     }
+    login(email, password) {
+      return axios.post(API_URL + "login", {
+        email,
+        password,
+        headers: AuthBarier()
+      })
+    }
   }
   
 

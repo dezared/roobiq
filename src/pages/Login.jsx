@@ -7,6 +7,10 @@ import TextInput from '../components/controls/TextInput';
 import Button from '../components/controls/Button';
 import { loginValidationSchema } from '../configs/validations';
 
+import { useHistory } from 'react-router-dom';
+import AuthService from '../utils/auth/AuthorizationService';
+import FormApiValidator from '../utils/forms/FormApiValidator'
+
 const Wrap = styled.div`
   width: 100%;
   height: 100vh;
@@ -82,14 +86,27 @@ const LoginBtn = styled(Button)`
 `;
 
 function Login() {
+  const history = useHistory();
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
     validationSchema: loginValidationSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: (values, actions) => {
+      console.log(actions)
+      actions.setStatus(undefined);
+      AuthService.login(values.email, values.password).then(
+        (response) => {
+          localStorage.setItem("userAuthorizationToken", JSON.stringify(response.data));
+          history.push("/");
+          return Promise.resolve();
+        },
+        (error) => {
+          FormApiValidator(error, actions)
+          return Promise.reject();
+        }
+      );
     },
   });
 
@@ -98,7 +115,6 @@ function Login() {
     formik.handleSubmit();
   }, [formik]);
 
-  console.log('formik.errors', formik.errors);
   return (
     <Wrap>
       <Form onSubmit={onSubmit}>

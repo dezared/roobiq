@@ -9,6 +9,7 @@ import { registrationValidationSchema } from '../configs/validations';
 import { useHistory } from 'react-router-dom';
 
 import AuthService from '../utils/auth/AuthorizationService';
+import FormApiValidator from '../utils/forms/FormApiValidator'
 
 const Wrap = styled.div`
   width: 100%;
@@ -80,22 +81,20 @@ function Login() {
       passwordConfirmation: '',
     },
     validationSchema: registrationValidationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, actions) => {
       AuthService.register(values.email, values.password, values.passwordConfirmation).then(
         (response) => {
-          console.log(response);
           localStorage.setItem("userAuthorizationToken", JSON.stringify(response.data));
           history.push("/");
           //window.location.reload();
           return Promise.resolve();
         },
         (error) => {
-          console.log(error)
-          // регистрация не все ок
+          FormApiValidator(error, actions)
           return Promise.reject();
         }
       );
-    },
+    }
   });
 
   const onSubmit = useCallback((e) => {
@@ -140,7 +139,7 @@ function Login() {
 
         <ButtonGroup>
           <RegistrationBtn type="submit">Зарегистрироваться</RegistrationBtn>
-          <Button component={Link} variant="text" to="/components">У меня уже есть аккаунт</Button>
+          <Button component={Link} variant="text" to="/login">У меня уже есть аккаунт</Button>
         </ButtonGroup>
       </Form>
     </Wrap>
