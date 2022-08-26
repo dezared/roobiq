@@ -3,15 +3,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SlideBox = styled.div`
-  width: 117px;
-  height: 66px;
+  width: 100%;
+  height: 100%;
   filter: drop-shadow(0px 2px 4px rgba(107, 115, 137, 0.2));
-  background: #25A9E0;
   border-radius: 8px;
-  flex: none;
+  flex-wrap: nowrap;
   order: 0;
   flex-grow: 0;
-  font-size: 3px;
+  font-size: 1em;
+  background: #25A9E0 ;
 `;
 
 const Title = styled.h1`
@@ -28,7 +28,6 @@ const Title = styled.h1`
 const SolutionList = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   gap: calc((100% / 3) - 2rem);
   position: absolute;
   left: 5.21%;
@@ -36,20 +35,20 @@ const SolutionList = styled.div`
 `;
 
 const SolutionItem = styled.div`
-  flex: 1 1 calc((100% / 3) - 2rem);
-  font-size: 3px;
+  flex: calc((100% / 3) - 2rem);
+  font-size: 1em;
 `;
 
 const SolutionItemIcon = styled.h2`
   top: 5%;
-  position: absolute;
+  //position: absolute;
   font-size: 1.7em;
   line-height: 1.8em;
   color: #fff;
 `;
 
 const SolutionItemTitle = styled.h2`
-  position: absolute;
+  //position: absolute;
   top: 45%;
   font-weight: 500;
   font-size: 0.8em;
@@ -58,17 +57,17 @@ const SolutionItemTitle = styled.h2`
 `;
 
 const SolutionItemList = styled.ol`
-  position: absolute;
+  //position: absolute;
   top: 60%;
   list-style-type: disc;
   list-style-position: inside;
-  font-size: 1px;
+  font-size: 1em;
 `;
 
 const SolutionItemLi = styled.li`
   font-weight: 300;
-  line-height: 1.5em;
-  font-size: 1.2em;
+  //line-height: 1.5em;
+  font-size: 0.5em;
   color: #fff;
 `;
 
@@ -82,7 +81,8 @@ function SolutionSlide({ title, solutionList }) {
             <SolutionItemIcon>{Sl.SolutionItemIcon}</SolutionItemIcon>
             <SolutionItemTitle>{Sl.SolutionItemTitle}</SolutionItemTitle>
             <SolutionItemList>
-              {Sl.SolutionItemList.map((solLi) => <SolutionItemLi key={solLi.index}>{solLi.desc}</SolutionItemLi>)}
+              {Sl.SolutionItemList.map((solLi) => {solLi.desc.map((point) =>
+                <SolutionItemLi key={solLi.index}>{point}</SolutionItemLi>)})}
             </SolutionItemList>
           </SolutionItem>
         ))}

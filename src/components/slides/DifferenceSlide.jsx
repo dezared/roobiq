@@ -3,25 +3,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SlideBox = styled.div`
-  width: 117px;
-  height: 66px;
+  width: 100%;
+  height: 100%;
   filter: drop-shadow(0px 2px 4px rgba(107, 115, 137, 0.2));
   border-radius: 8px;
+  flex: none;
   order: 0;
   flex-grow: 0;
-  font-size: 3px;
+  font-size: 1em;
 `;
+
 
 const Difference = styled.p`
   position: absolute;
-  top: 25.28%;
-  bottom: 32.87%;
+  top: 35.28%;
+  bottom: 22.87%;
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   padding-left: 2%;
   padding-right: 2%;
+  line-height: 1.2em;
   font-size: 1em;
   background: #25A9E0;
 `;

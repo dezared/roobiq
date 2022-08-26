@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import ProblSlide from '../components/slides/ProblemSlide';
+import Slide from '../components/Slides';
+import PropTypes from 'prop-types';
 
 const SlideCont = styled.div`
   display: flex;
@@ -21,16 +22,25 @@ const SlideCont = styled.div`
   }
 `;
 
-function SlidesCont() {
+function SlidesCont( { slides } ) {
 
   return (
     <SlideCont>
-      {/*{slides.map((slide) => (*/}
-        <ProblSlide />
-        <ProblSlide />
-        <ProblSlide />
+      {slides.map((slide) => <Slide key={slide.id}/>)}
     </SlideCont>
   );
+}
+
+SlidesCont.propTypes = {
+  slides: PropTypes.array,
+}
+
+SlidesCont.defaultProps = {
+  slides: [
+    {name: 'bdkjvsZD', id: 1,},
+    {name: 'bdkjvsZD', id: 2,},
+    {name: 'bdkjvsZD', id: 3,}
+  ]
 }
 
 export default SlidesCont;

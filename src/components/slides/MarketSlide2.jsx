@@ -3,14 +3,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SlideBox = styled.div`
-  width: 117px;
-  height: 66px;
+  width: 100%;
+  height: 100%;
   filter: drop-shadow(0px 2px 4px rgba(107, 115, 137, 0.2));
   border-radius: 8px;
   flex: none;
   order: 0;
   flex-grow: 0;
-  font-size: 3px;
+  font-size: 1em;
 `;
 
 const Title = styled.h1`
@@ -75,14 +75,14 @@ const RightBlock = styled.div`
   top: 0;
   bottom: 0;
   background: #25A9E0;
-  font-size: 3px;
+  font-size: 1em;
 `;
 
 const RightCount = styled.p`
   position: absolute;
   left: 13%;
   right: 5.73%;
-  top: 25.37%;
+  top: 35.37%;
   font-weight: 500;
   font-size: 4em;
   text-align: right;
@@ -121,7 +121,7 @@ function MarketSlide2({ title, countTitle, count, peopleVal, site, cash, cashVal
       <LeftTitle>{countTitle}</LeftTitle>
       <LeftCount>{count}</LeftCount>
       <LeftVal>{peopleVal}</LeftVal>
-      <Site href='#'>{site}</Site>
+      <Site href='#'>Источник: {site}</Site>
       <RightBlock>
         <RightCount>{cash}</RightCount>
         <RightVal>{cashVal}</RightVal>

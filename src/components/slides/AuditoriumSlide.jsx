@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 
 
 const SlideBox = styled.div`
-  width: 517px;
-  height: 266px;
+  width: 100%;
+  height: 100%;
   filter: drop-shadow(0px 2px 4px rgba(107, 115, 137, 0.2));
   border-radius: 8px;
   flex: none;
   order: 0;
   flex-grow: 0;
-  font-size: 3px;
+  font-size: 1em;
 `;
 
 const Title = styled.h1`
@@ -21,7 +21,7 @@ const Title = styled.h1`
   top: 9.26%;
   bottom: 78.89%;
   font-weight: 500;
-  font-size: 2em; 
+  font-size: 2em;
   color: #25A9E0;
 `;
 
@@ -32,7 +32,7 @@ const LeftBlock = styled.div`
   left: 0;
   top: 39.6%;
   background: #25A9E0;
-  font-size: 4px;
+  font-size: 1em;
   display: flex;
   justify-content: center;
 `;
@@ -43,25 +43,23 @@ const LeftTitle = styled.p`
   right: 14.33%;
   top: 40%;
   font-weight: 700;
-  font-size: 1em;
+  font-size: 1.2em;
   color: #FFFFFF;
 `;
 
 const TitleList = styled.ul`
   position: absolute;
-  left: 41.56%;
-  right: 6.67%;
+  left: 50.56%;
   top: 43.61%;
-  bottom: 26.76%;
   list-style-type: disc;
   list-style-position: inside;
-  font-size: 15px;
+  font-size: 1em;
 `;
 
 const TitleLi = styled.li`
   font-weight: 300;
   line-height: 1.5em;
-  font-size: 1.2em;
+  font-size: 1em;
   color: #404041;
 
 `;

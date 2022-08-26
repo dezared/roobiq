@@ -59,12 +59,6 @@ TabsContainer.defaultProps = {
     {
       status: 'next', id: 3, index: 3, children: 'target',
     },
-    {
-      status: 'next', id: 3, index: 3, children: 'target',
-    },
-    {
-      status: 'next', id: 3, index: 3, children: 'target',
-    },
   ],
 };
 

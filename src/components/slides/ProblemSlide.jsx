@@ -3,14 +3,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SlideBox = styled.div`
-  width: 117px;
-  height: 66px;
+  width: 100%;
+  height: 100%;
   filter: drop-shadow(0px 2px 4px rgba(107, 115, 137, 0.2));
   border-radius: 8px;
   flex: none;
   order: 0;
   flex-grow: 0;
-  font-size: 3px;
+  font-size: 1em;
 `;
 
 const Title = styled.h1`
@@ -32,13 +32,13 @@ const TitleList = styled.ul`
   bottom: 56.11%;
   list-style-type: disc;
   list-style-position: inside;
-  font-size: 2px;
+  font-size: 1em;
 `;
 
 const TitleLi = styled.li`
   font-weight: 300;
-  line-height: 1.5em;
-  font-size: 1.2em;
+  line-height: 1.4em;
+  font-size: 1em;
   color: #404041;
 `;
 
@@ -46,7 +46,7 @@ const Line = styled.div`
   position: absolute;
   left: 5.16%;
   right: 53.65%;
-  top: 52.81%;
+  top: 48.81%;
   bottom: 50.19%;
   border: 0.1em solid #25A9E0;
   border-radius: 10px;
@@ -60,8 +60,8 @@ const Description = styled.p`
   top: 57.22%;
   bottom: 13.15%;
   font-weight: 300;
-  line-height: 1em;
-  font-size: 0.8em;
+  line-height: 1.2em;
+  font-size: 0.9em;
   color: #404041;
 
 `;

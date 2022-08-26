@@ -43,7 +43,8 @@ const Head = styled.p`
   font-size: 1.5em;
   font-weight: 400;
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  padding-left: 3%;
   align-items: center;
   text-align: left;
 `;
@@ -72,7 +73,7 @@ const ListItems = styled.ul`
 const ListItemsLi = styled.li`
   width: 100%;
   font-weight: 200;
-  font-size: 1.4em;
+  font-size: 1.2em;
   line-height: 2em;
   color: #000;
 `;

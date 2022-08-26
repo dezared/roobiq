@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from './controls/Button';
-import BuisnesModel from './slides/BuisnesModel';
 import SlidesCont from "./SlidesContainer";
+import TeamSlide from "./slides/TeamSlide";
+import MarketSlide1 from "./slides/MarketSlide1";
 
 
 const Wrap = styled.div`
@@ -45,6 +46,7 @@ const Window = styled.div`
   justify-content: center;
   box-shadow: 0px 2px 4px rgba(107, 115, 137, 0.2);
   border-radius: 16px;
+  font-size: 7px;
 `;
 
 const MyButton = styled(Button)`
@@ -68,7 +70,7 @@ function CheckPresentation({ handleChange }) {
       <Content>
         <Title>Презентация по итогу одной из секций</Title>
         <Window>
-          <BuisnesModel />
+          <MarketSlide1 />
         </Window>
         <SlidesCont />
           <MyButton onClick={handleChange}>Вернуться к созданию</MyButton>

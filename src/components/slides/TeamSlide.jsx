@@ -17,20 +17,20 @@ const SlideBox = styled.div`
 const Title = styled.h1`
   position: absolute;
   left: 5.21%;
-  right: 73.8%;
   top: 9.26%;
-  bottom: 78.89%;
   font-weight: 500;
   font-size: 2em;
   color: #25A9E0;
 `;
 
 const ListCont = styled.div`
-  width: 100%;
-  height: 70%;
+  width: 90%;
+  height: 50%;
   position: absolute;
-  top: 20%;
+  top: 50%;
+  left: 5%;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
 `;
@@ -39,23 +39,26 @@ const Human = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 20%;
+  width: auto;
 `;
 
 const DevDesc = styled.ul`
+  padding-top: 4%;
   list-style-type: disc;
+  list-style-position: inside;
 `;
 
 const DevDescLi = styled.li`
-  font-size: 0.7em;
+  font-size: 0.5em;
 `;
 
 const HumanName = styled.h2`
   color: #25A9E0;
-  font-size: 1.5em;
+  font-size: 1em;
 `;
 
 const HumanJob = styled.h3`
+  padding-top: 3%;
   color: #082C4E;
   font-size: 0.5em;
 `;
