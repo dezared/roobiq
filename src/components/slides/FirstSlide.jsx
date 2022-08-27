@@ -26,7 +26,7 @@ const Title = styled.h1`
 const Description = styled.p`
   position: absolute;
   left: 6.41%;
-  top: 57.78%;
+  top: 60.78%;
   font-weight: 400;
   font-size: 1.5em;
   color: #404041;

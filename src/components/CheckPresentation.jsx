@@ -4,6 +4,8 @@ import Button from './controls/Button';
 import SlidesCont from "./SlidesContainer";
 import TeamSlide from "./slides/TeamSlide";
 import MarketSlide1 from "./slides/MarketSlide1";
+import CompetitorsAndAlternatives from './slides/CompetitorsAndAlternatives';
+import FirstSlide from './slides/FirstSlide';
 
 
 const Wrap = styled.div`
@@ -70,7 +72,7 @@ function CheckPresentation({ handleChange }) {
       <Content>
         <Title>Презентация по итогу одной из секций</Title>
         <Window>
-          <MarketSlide1 />
+          <CompetitorsAndAlternatives />
         </Window>
         <SlidesCont />
           <MyButton onClick={handleChange}>Вернуться к созданию</MyButton>

@@ -1,14 +1,7 @@
 //import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Paper from '@mui/material/Paper'
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const SlideBox = styled.div`
   width: 100%;
@@ -22,31 +15,44 @@ const SlideBox = styled.div`
 `;
 
 const Title = styled.h1`
-  position: absolute;
-  left: 5.21%;
-  right: 73.8%;
-  top: 9.26%;
-  bottom: 78.89%;
-  font-weight: 500;
-  font-size: 2em;
-  color: #25A9E0;
+position: absolute;
+left: 5.21%;
+top: 9.26%;
+bottom: 78.89%;
+font-weight: 500;
+font-size: 2em;
+color: #25A9E0;
 `;
 
-const MyTableContainer = styled(TableContainer)`
+
+const MyTableContainer = styled.div`
   position: absolute;
   width: 100%;
+  max-width: 350px;
   height: 80%;
   top: 20%;
 `;
 
-const MyTableHead = styled(TableHead)`
-  height: 0.5em;
-  width: calc(100%/lenght(competitors));
+const Table = styled.table`
+  width: 100%;
+  height: 100%;
 `;
 
-const MyTableCell = styled(TableCell)`
-  height: 0.5em;
-  width: calc(100%/lenght(competitors));
+const MyTableHead = styled.th`
+flex-basis: 100%;
+text-align: center;
+background: #25A9E0;
+color: #fff;
+`;
+
+const TableRow = styled.tr`
+  display: flex
+`;
+
+const TableData = styled.td`
+flex-basis: 100%;
+text-align: center;
+border: 1px solid black;
 `;
 
 function CompetitorsAndAlternatives({ title, massive, competitors, properties }) {
@@ -54,25 +60,20 @@ function CompetitorsAndAlternatives({ title, massive, competitors, properties })
   return (
     <SlideBox>
       <Title>{title}</Title>
-      <MyTableContainer component={Paper}>
+      <MyTableContainer>
         <Table sx={{ maxWidth: 350 }} aria-label="simple table">
-          <MyTableHead>
-            <TableRow>
-              <MyTableCell />
-              {competitors.map((competitor) => <MyTableCell key={competitor.id}>{competitor.name}</MyTableCell>)}
-            </TableRow>
-          </MyTableHead>
-          <TableBody>
-            {properties.map((row, index) => (
-              <TableRow
-                key={row}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+        <TableRow>
+          <MyTableHead></MyTableHead> 
+          {competitors.map((competitor) => <MyTableHead key={competitor.id}>{competitor.name}</MyTableHead>)}
+        </TableRow>
+          {properties.map((row, index) => (
+            <TableRow
+              key={row}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <MyTableCell>{row}</MyTableCell>
-                {massive[index].map((data) => <MyTableCell key={data.key}>{data.flag.toString()}</MyTableCell>)}
-              </TableRow>
+              <TableData>{row}</TableData>
+              {massive[index].map((data) => <TableData key={data.key}>{data.flag.toString()}</TableData>)}              </TableRow>
           ))}
-        </TableBody>
       </Table>
     </MyTableContainer>
     </SlideBox>

@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import Slide from '../components/Slides';
+import FirstSlide from '../components/slides/FirstSlide';
 import PropTypes from 'prop-types';
 
 const SlideCont = styled.div`
   display: flex;
   position: absolute;
+  max-width: 350px;
+  padding-left: 5%;
   top: 60%;
   flex-direction: row;  
   align-items: flex-start;
@@ -22,11 +24,23 @@ const SlideCont = styled.div`
   }
 `;
 
+const Slide = styled.div`
+  width: 117px;
+  height: 66px;
+  filter: drop-shadow(0px 2px 4px rgba(107, 115, 137, 0.2));
+  border-radius: 8px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  font-size: 2px;
+  `;
+
 function SlidesCont( { slides } ) {
 
   return (
     <SlideCont>
-      {slides.map((slide) => <Slide key={slide.id}/>)}
+    
+      <Slide> <FirstSlide /> </Slide>
     </SlideCont>
   );
 }
@@ -37,9 +51,7 @@ SlidesCont.propTypes = {
 
 SlidesCont.defaultProps = {
   slides: [
-    {name: 'bdkjvsZD', id: 1,},
-    {name: 'bdkjvsZD', id: 2,},
-    {name: 'bdkjvsZD', id: 3,}
+    <FirstSlide />
   ]
 }
 

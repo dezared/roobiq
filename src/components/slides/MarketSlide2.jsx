@@ -16,7 +16,6 @@ const SlideBox = styled.div`
 const Title = styled.h1`
   position: absolute;
   left: 5.21%;
-  right: 73.8%;
   top: 9.26%;
   bottom: 78.89%;
   font-weight: 500;

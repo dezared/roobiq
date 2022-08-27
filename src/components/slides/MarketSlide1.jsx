@@ -17,7 +17,6 @@ const SlideBox = styled.div`
 const Title = styled.h1`
   position: absolute;
   left: 5.21%;
-  right: 73.8%;
   top: 9.26%;
   bottom: 78.89%;
   font-weight: 500;
@@ -27,32 +26,34 @@ const Title = styled.h1`
 
 const TitlesContainer = styled.div`
   width: 50%;
+  top: 23%;
   height: 40%;
   left: 3%;
   position: absolute;
   display: flex;
   flex-direction: column;
+  gap: 8%;  
 `;
 
 const TAM = styled.h2`
-  font-size: 1em;
+  font-size: 1.5em;
   color: #C6D5DB;
 `;
 
 const SAM = styled.h2`
-  font-size: 1em;
+  font-size: 1.5em;
   color: #B4CFDA;
 `;
 
 const SOM = styled.h2`
-  font-size: 1em;
+  font-size: 1.5em;
   color: #25A9E0;
 `;
 
 const List = styled.ol`
   list-style-type: disc;
   list-style-position: inside;
-  font-size: 1em;
+  font-size: 1.3em;
   color: #25A9E0;
 `;
 
@@ -61,41 +62,47 @@ const Li = styled.li`
   font-size: 0.7em;
 `;
 
-const BiggestCircle = styled.div`
-  width: 40%;
-  height: 70%;
+const Sources = styled.p`
   position: absolute;
-  left: 55%;
-  top: 18.15%;
-  bottom: 18.07%;
+  top: 85%;
+  width: 60%;
+  left: 5.21%;
+  font-size: 0.7em;  
+  color: #25A9E0;
+`;
+
+const BiggestCircle = styled.div`
+  width: 45%;
+  height: 80%;
+  position: absolute;
+  left: 50%;
+  top: 13.15%;
   border-radius: 100%;
   background: #C6D5DB;
   font-size: 1em;
 `;
 
 const MiddleCircle = styled.div`
-  width: 40%;
-  height: 40%;
+  width: 75%;
+  height: 75%;
   position: absolute;
-  left: 55%;
-  top: 38.54%;
-  bottom: 18.07%;
+  left: 13%;
+  top: 25.54%;
   border-radius: 100%;
   background: #B4CFDA;
-  font-size: 0.75em;
+  font-size: 0.9em;
 `;
 
 
 const SmallestCircle = styled.div`
-  width: 30%;
-  height: 30%;
+  width: 70%;
+  height: 70%;
   position: absolute;
-  top: 52%;
-  left: 65%;
-  bottom: 18.07%;
+  top: 30%;
+  left: 15%;
   border-radius: 100%;
   background: #25A9E0;
-  font-size: 0.5em;
+  font-size: 0.7em;
 `;
 
 const RightTitle = styled.h2`
@@ -107,7 +114,7 @@ const RightTitle = styled.h2`
   top: 15%;
 `;
 
-function MarketSlide1({ title, tam, sam, som }) {
+function MarketSlide1({ title, tam, sam, som, sources }) {
   return (
     <SlideBox>
       <Title>{title}</Title>
@@ -116,6 +123,7 @@ function MarketSlide1({ title, tam, sam, som }) {
         <List>
           {tam.list.map((t) => <Li>{t}</Li>)}
         </List>
+
         <SAM>SAM</SAM>
         <List>
           {sam.list.map((s) => <Li>{s}</Li>)}
@@ -125,6 +133,7 @@ function MarketSlide1({ title, tam, sam, som }) {
           {som.list.map((s) => <Li>{s}</Li>)}
         </List>
       </TitlesContainer>
+      <Sources>Источники: {sources}</Sources>
       <BiggestCircle>
         <RightTitle>{tam.value}</RightTitle>
         <MiddleCircle>
@@ -143,10 +152,19 @@ MarketSlide1.propTypes = {
   tam: PropTypes.object,
   sam: PropTypes.object,
   som: PropTypes.object,
+  sources: PropTypes.array,
 }
 
 MarketSlide1.defaultProps = {
   title: 'Market b2b',
+  sources: [
+    'seed-db.com',
+    'gemconsorium.org', 
+    'Global Entrepreneurship Monitor', 
+    'ВШЭ', 
+    'firrma.ru', 
+    'Министерство экономического развития',
+  ],
   tam: {
     value: '90 billions',
     list: [
