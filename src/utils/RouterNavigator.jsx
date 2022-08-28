@@ -11,6 +11,7 @@ import Main from '../pages/index';
 import Chat from '../pages/Chat';
 import ScenarioSelection from '../pages/ScenarioSelection';
 
+
 function RouterNavigator() {
   return (
     <Router history={history}>
@@ -19,8 +20,6 @@ function RouterNavigator() {
         <Route path="/login" exact><Login /></Route>
         <Route path="/registration" exact><Registration /></Route>
         <Route path="/constructor" exact><ScenarioSelection /></Route>
-        <Route path="/constructor/:id" exact><Chat /></Route>
-        <Route path="/ad" exact>ad</Route>
         <Route path="/components" exact><Components /></Route>
         <Route><p>404 not found</p></Route>
       </Switch>

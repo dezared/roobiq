@@ -27,14 +27,15 @@ const Title = styled.h1`
 const SolutionList = styled.div`
   display: flex;
   flex-direction: row;
-  gap: calc((100% / 3) - 2rem);
+  width: 90%;
   position: absolute;
-  left: 5.21%;
+  text-align: center;
+  left: 5%;
   top: 33.61%;
 `;
 
 const SolutionItem = styled.div`
-  flex: calc((100% / 3) - 2rem);
+  flex-basis:100%;
   font-size: 1em;
 `;
 
@@ -80,8 +81,7 @@ function SolutionSlide({ title, solutionList }) {
             <SolutionItemIcon>{Sl.SolutionItemIcon}</SolutionItemIcon>
             <SolutionItemTitle>{Sl.SolutionItemTitle}</SolutionItemTitle>
             <SolutionItemList>
-              {Sl.SolutionItemList.map((solLi) => {solLi.desc.map((point) =>
-                <SolutionItemLi key={solLi.index}>{point}</SolutionItemLi>)})}
+              {/* {Sl.SolutionItemList.desc.map((solLi) => <SolutionItemLi key={solLi}>{solLi}</SolutionItemLi>)} */}
             </SolutionItemList>
           </SolutionItem>
         ))}
@@ -100,7 +100,7 @@ SolutionSlide.defaultProps = {
     {
       SolutionItemIcon: '1',
       SolutionItemTitle: 'Constructor',
-      SolutionItemList: [
+      SolutionItemList:
         {
           desc: [
             'Четкая структура',
@@ -112,13 +112,12 @@ SolutionSlide.defaultProps = {
           ],
           index: 1,
         },
-      ],
-      id: 1,
+          id: 1,
     },
     {
       SolutionItemIcon: '1',
       SolutionItemTitle: 'Constructor',
-      SolutionItemList: [
+      SolutionItemList:
         {
           desc: [
             'Четкая структура',
@@ -130,13 +129,12 @@ SolutionSlide.defaultProps = {
           ],
           index: 2,
         },
-      ],
       id: 2,
     },
     {
       SolutionItemIcon: '1',
       SolutionItemTitle: 'Constructor',
-      SolutionItemList: [
+      SolutionItemList:
         {
           desc: [
             'Четкая структура',
@@ -148,8 +146,7 @@ SolutionSlide.defaultProps = {
           ],
           index: 3,
         },
-      ],
-      id: 3,
+      id: 2,
     },
   ],
 };

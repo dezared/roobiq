@@ -52,7 +52,7 @@ function Chat() {
 
   const [questionIndex, setQuestionIndex] = useState(0);
 
-  const [answers, setAnswers] = useState({});
+  const [answers, setAnswers] = useState([[]]);
 
   const currentStep = useMemo(
     () => scenario.steps[stepIndex],
@@ -128,14 +128,16 @@ function Chat() {
   );
 
   const onActionChange = (obj) => {
-    setAnswers({ ...answers, ...obj });
+    let newAnswers = [...answers];
+    newAnswers[stepIndex].push(obj);
+    setAnswers(newAnswers);
     setQuestionIndex(questionIndex + 1);
   };
 
   const onNextTab = () => {
+    answers.push([]);
     setStepIndex(stepIndex + 1);
     setQuestionIndex(0);
-    setAnswers({});
   };
 
   const [open, setOpen] = React.useState(false);
@@ -155,7 +157,7 @@ function Chat() {
           <ActionBlock
             actionType={currentQuestion.answerType}
             actionName={currentQuestion.id}
-            answers={answers}
+            answers={answers[currentStep]}
             onChange={onActionChange}
             payload={currentQuestion.payload}
           />

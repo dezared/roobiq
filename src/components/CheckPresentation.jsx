@@ -6,7 +6,7 @@ import TeamSlide from "./slides/TeamSlide";
 import MarketSlide1 from "./slides/MarketSlide1";
 import CompetitorsAndAlternatives from './slides/CompetitorsAndAlternatives';
 import FirstSlide from './slides/FirstSlide';
-
+import SolutionSlide from './slides/SolutionSlide';
 
 const Wrap = styled.div`
   width: 100%;

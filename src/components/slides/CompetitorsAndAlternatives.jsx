@@ -43,6 +43,7 @@ flex-basis: 100%;
 text-align: center;
 background: #25A9E0;
 color: #fff;
+font-size: 1.5em;
 `;
 
 const TableRow = styled.tr`
@@ -51,8 +52,10 @@ const TableRow = styled.tr`
 
 const TableData = styled.td`
 flex-basis: 100%;
+height: auto;
 text-align: center;
-border: 1px solid black;
+font-size: 1.5em;
+line-height: 1.7em;
 `;
 
 function CompetitorsAndAlternatives({ title, massive, competitors, properties }) {
