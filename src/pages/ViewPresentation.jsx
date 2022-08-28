@@ -14,19 +14,19 @@ import styled from 'styled-components';
 
 const Wrap = styled.div`
   width: 100%;
-  height: 100vh;
   display: flex;
+  height: auto;
   flex-direction: column;
   align-items: center;
+  overflow: scroll;
 `;
 
 const Content = styled.div`
   width: 100%;
   max-width: 350px;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  &::-webkit-scrollbar {
-    display: none;
   };
 `;
 

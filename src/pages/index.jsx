@@ -17,10 +17,19 @@ const Wrap = styled.div`
   width: 100%;
 `;
 
-const CreateBtn = styled(Button)`
-  width: 100%;
-  max-width: 350px;
-  
+const MyButton = styled(Button)`
+  width: 90%;
+  max-width: 315px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 16px;
+  top: 80%;
+  position: absolute;
 `;
 
 const ItemsWrap = styled(Stack)`
@@ -79,7 +88,6 @@ function Main() {
         <IconButton><AccountCircleIcon fontSize="large" color="darkGrey" width="40px" /></IconButton>
       </Header>
 
-      <CreateBtn component={Link} to="/constructor">Создать презентацию</CreateBtn>
 
        <ItemsWrap spacing={2}>
         <Item>
@@ -104,6 +112,7 @@ function Main() {
             </div>
         </Item>
        </ItemsWrap>
+       <MyButton component={Link} to="/constructor">Создать презентацию</MyButton>
     </Wrap>
   );
 }
