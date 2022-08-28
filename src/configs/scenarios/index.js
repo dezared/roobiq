@@ -26,7 +26,8 @@ const scenarios = [
             id: 'project_name',
             question: 'Отлично! Подскажи пожалуйста, название проекта?',
             answerType: ActionType.text,
-          }, {
+          },
+          {
             id: 'project_description',
             question: 'В 2-3 предложения опиши проект пожалуйста.',
             answerType: ActionType.text,
