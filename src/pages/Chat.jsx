@@ -11,6 +11,7 @@ import Button from '../components/controls/Button';
 import TabsContainer from '../components/TabsContainer';
 import Modal from '@mui/material/Modal';
 import CheckPresentation from '../components/CheckPresentation'
+import ViewPresentation from './ViewPresentation';
 
 const Wrap = styled.div`
   width: 100%;
@@ -47,8 +48,7 @@ const BtnGroup = styled.div`
 function Chat() {
   const scenario = useMemo(() => initScenarios[0], []);
 
-  const [stepId, setStepId] = useState(scenario.steps[0].id);
-  const [stepIndex, setStepIndex] = useState(0);
+  const [stepIndex, setStepIndex] = useState(9);
 
   const [questionIndex, setQuestionIndex] = useState(0);
 
@@ -97,47 +97,56 @@ function Chat() {
 
       // eslint-disable-next-line no-restricted-syntax
       for (const question of currentStep.questions) {
-        if (!answers[question.id]) {
-          newChat.push({ question: question.question, id: question.id, payload: question.payload });
-          return newChat;
+        if (!answers[answers.length-1].find(m => m[question.id])) { // если нет ответа с этим questions.id
+          newChat.push({ question: question.question, id: question.id, payload: question.payload }); // отправляем вопрос
+          return newChat; // возврашаем
         }
 
-        newChat.push({
+        newChat.push({ // пушим ответ пользователя
           question: question.question,
-          answer: answers[question.id],
+          answer: answers[answers.length-1].find(m => m[question.id])[question.id],
           answerType: question.answerType,
           payload: question.payload,
           id: question.id,
         });
       }
 
-      newChat.push({
-        question: 'Ты молодец! Мы заполнили секцию ✅',
-        id: 'nice',
-        answerType: AnswerType.text,
-      });
-      newChat.push({
-        question: 'Посмотри, что получилось или давай двигаться дальше)',
-        id: 'next',
-        answerType: AnswerType.text,
-      });
+      if (currentStep.questions.length == questionIndex) {
+        newChat.push({
+          question: 'Ты молодец! Мы заполнили секцию ✅',
+          id: 'nice',
+          answerType: AnswerType.text,
+        });
+        newChat.push({
+          question: 'Посмотри, что получилось или давай двигаться дальше)',
+          id: 'next',
+          answerType: AnswerType.text,
+        });
+      }
 
       return newChat;
     },
-    [currentStep.questions, answers, stepIndex],
+    [currentStep.questions, answers, stepIndex, questionIndex],
   );
 
   const onActionChange = (obj) => {
     let newAnswers = [...answers];
-    newAnswers[stepIndex].push(obj);
+    newAnswers[newAnswers.length - 1].push(obj);
     setAnswers(newAnswers);
     setQuestionIndex(questionIndex + 1);
   };
 
   const onNextTab = () => {
-    answers.push([]);
-    setStepIndex(stepIndex + 1);
-    setQuestionIndex(0);
+    if(tabs.length > stepIndex + 1)
+    {
+      answers.push([]);
+      setStepIndex(stepIndex + 1);
+      setQuestionIndex(0);
+    }
+    else {
+      // END
+      console.log(answers)
+    }
   };
 
   const [open, setOpen] = React.useState(false);
@@ -146,6 +155,14 @@ function Chat() {
 
   const handleChange = () => {
     setOpen(!open)
+ }
+
+ const [openPresentationCompleteViewer, setopenPresentationCompleteViewer] = React.useState(false);
+  const handleOpenPresentationCompleteViewer = () => handleChangePresentationCompleteViewer(true);
+  const handleClosePresentationCompleteViewer = () => handleChangePresentationCompleteViewer(false);
+
+  const handleChangePresentationCompleteViewer = () => {
+    setopenPresentationCompleteViewer(!openPresentationCompleteViewer)
  }
 
   return (
@@ -157,15 +174,21 @@ function Chat() {
           <ActionBlock
             actionType={currentQuestion.answerType}
             actionName={currentQuestion.id}
-            answers={answers[currentStep]}
+            answers={answers[answers.length - 1]}
             onChange={onActionChange}
             payload={currentQuestion.payload}
           />
         ) : (
           <div>
             <BtnGroup>
-              <Button onClick={handleOpen}>Смотреть</Button>
-              <Button color="secondary" onClick={onNextTab}>Продолжить создание</Button>
+              {stepIndex + 1 >= tabs.length ? (
+                <Button onClick={handleChangePresentationCompleteViewer}>Закончить создание</Button>
+              ) : (
+                <>
+                  <Button color="secondary" onClick={onNextTab}>Продолжить создание</Button>
+                  <Button onClick={handleOpen}>Смотреть</Button>
+                </>
+              )}
             </BtnGroup>
             <Modal
               open={open}
@@ -173,6 +196,15 @@ function Chat() {
             >
               <div>
                 <CheckPresentation handleChange={handleChange}></CheckPresentation>
+              </div>
+            </Modal>
+
+            <Modal
+              open={openPresentationCompleteViewer}
+              onClose={handleClosePresentationCompleteViewer}
+            >
+              <div>
+                <ViewPresentation handleChange={handleChangePresentationCompleteViewer}></ViewPresentation>
               </div>
             </Modal>
           </div>

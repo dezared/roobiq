@@ -311,7 +311,7 @@ function FieldComponent({formik, fieldName, placeholder, type, index, sourceFiel
     case ActionType.checkboxArray:
       return (
         <CheckboxesWrap>
-            {answers[sourceField].map((option) => (
+            {answers.find(m => m[sourceField])[sourceField].map((option) => (
               <CheckboxWrap key={option}>
                 <Checkbox
                   checkedIcon={(
