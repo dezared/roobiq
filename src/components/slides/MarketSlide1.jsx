@@ -28,7 +28,7 @@ const TitlesContainer = styled.div`
   width: 50%;
   top: 23%;
   height: 40%;
-  left: 3%;
+  left: 5%;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -75,8 +75,8 @@ const BiggestCircle = styled.div`
   width: 45%;
   height: 80%;
   position: absolute;
-  left: 50%;
-  top: 13.15%;
+  left: 45%;
+  top: 12.15%;
   border-radius: 100%;
   background: #C6D5DB;
   font-size: 1em;
@@ -106,12 +106,11 @@ const SmallestCircle = styled.div`
 `;
 
 const RightTitle = styled.h2`
-  font-size: 1em;
-  padding-top: 2%;
+  font-size: 2.5em;
   color: #fff;
   position: absolute;
-  left: 36%;
-  top: 15%;
+  left: 23%;
+  top: 14%;
 `;
 
 function MarketSlide1({ title, tam, sam, som, sources }) {

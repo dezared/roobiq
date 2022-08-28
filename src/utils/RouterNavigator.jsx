@@ -10,6 +10,7 @@ import Registration from '../pages/Registration';
 import Main from '../pages/index';
 import Chat from '../pages/Chat';
 import ScenarioSelection from '../pages/ScenarioSelection';
+import ViewPresentation from '../pages/ViewPresentation';
 
 
 function RouterNavigator() {
@@ -22,6 +23,7 @@ function RouterNavigator() {
         <Route path="/constructor" exact><ScenarioSelection /></Route>
         <Route path="/constructor/:id" exact><Chat /></Route>
         <Route path="/components" exact><Components /></Route>
+        <Route path="/slides" exact><ViewPresentation /></Route>
         <Route><p>404 not found</p></Route>
       </Switch>
     </Router>

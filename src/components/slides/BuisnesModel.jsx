@@ -65,7 +65,7 @@ const ListItems = styled.ul`
   height: 100%;
   list-style-type: disc;
   color: #25A9E0; 
-  font-size: 1em;
+  font-size: 0.8em;
   align-items: flex-start;
 `;
 
@@ -90,7 +90,7 @@ const BottomBlock = styled.div`
 
 const BottomContentTitle = styled.h1`
   position: absolute;
-  top: 35%;
+  top: 25%;
   left: 5%;
   font-size: 1.5em;
   font-weight: 400;

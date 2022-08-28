@@ -24,7 +24,7 @@ const Difference = styled.p`
   align-items: center;
   padding-left: 2%;
   padding-right: 2%;
-  line-height: 1.2em;
+  line-height: 1.6em;
   font-size: 1em;
   background: #25A9E0;
 `;

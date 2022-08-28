@@ -51,8 +51,8 @@ const SolutionItemTitle = styled.h2`
   //position: absolute;
   top: 45%;
   font-weight: 500;
-  font-size: 0.8em;
-  line-height: 1em;
+  font-size: 1.3em;
+  line-height: 2em;
   color: #FFFFFF;
 `;
 
@@ -61,12 +61,18 @@ const SolutionItemList = styled.ol`
   top: 60%;
   list-style-type: disc;
   list-style-position: inside;
-  font-size: 1em;
+  font-size: 1.5em;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: stretch;
 `;
 
 const SolutionItemLi = styled.li`
   font-weight: 300;
-  //line-height: 1.5em;
+  line-height: 1.5em;
   font-size: 0.5em;
   color: #fff;
 `;

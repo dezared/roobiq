@@ -5,43 +5,57 @@ import CompetitorsAndAlternatives from "../components/slides/CompetitorsAndAlter
 import CompetitorsSplashSlide from "../components/slides/CompetitorsSplashSlide"
 import DifferenceSlide from "../components/slides/DifferenceSlide"
 import MarketSlide1 from "../components/slides/MarketSlide1"
-import MarketSlide2 from "../components/slides/MarketSlide1"
+import MarketSlide2 from "../components/slides/MarketSlide2"
 import SolutionSlide from "../components/slides/SolutionSlide"
 import TeamSlide from "../components/slides/TeamSlide"
 import ProblemSlide from "../components/slides/ProblemSlide"
 
 import styled from 'styled-components';
 
-const PresentationContainer = styled.div`
-  position: relative;
+const Wrap = styled.div`
   width: 100%;
-  height: 77vw;
-  background: white;
-  display: block;  
-`;
-
-const PresentationWrapper = styled.div`
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  width: 100%
+  align-items: center;
+`;
+
+const Content = styled.div`
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  &::-webkit-scrollbar {
+    display: none;
+  };
+`;
+
+const Slide = styled.div`
+  border: 1px solid #f4f4f4;
+  width: 100%;
+  height: 200px;
+  font-size: 7px;
+  margin-top: 20px;
 `;
 
 function ViewPresentation({ answers, handleChange })
 {
     return (
-        <PresentationWrapper>
-            <PresentationContainer><FirstSlide></FirstSlide></PresentationContainer>
-            <PresentationContainer><AuditoriumSlide></AuditoriumSlide></PresentationContainer>
-            <PresentationContainer><ProblemSlide></ProblemSlide></PresentationContainer>
-            <PresentationContainer><SolutionSlide></SolutionSlide></PresentationContainer>
-            <PresentationContainer><MarketSlide1></MarketSlide1></PresentationContainer>
-            <PresentationContainer><MarketSlide2></MarketSlide2></PresentationContainer>
-            <PresentationContainer><CompetitorsSplashSlide></CompetitorsSplashSlide></PresentationContainer>
-            <PresentationContainer><CompetitorsAndAlternatives></CompetitorsAndAlternatives></PresentationContainer>
-            <PresentationContainer><DifferenceSlide></DifferenceSlide></PresentationContainer>
-            <PresentationContainer><BuisnesModel></BuisnesModel></PresentationContainer>
-            <PresentationContainer><TeamSlide></TeamSlide></PresentationContainer>
-        </PresentationWrapper>
+        <Wrap>
+          <Content>
+            <Slide><FirstSlide></FirstSlide></Slide>
+            <Slide><AuditoriumSlide></AuditoriumSlide></Slide>
+            <Slide><ProblemSlide></ProblemSlide></Slide>
+            <Slide><SolutionSlide></SolutionSlide></Slide>
+            <Slide><MarketSlide1></MarketSlide1></Slide>
+            <Slide><MarketSlide2></MarketSlide2></Slide>
+            <Slide><CompetitorsSplashSlide></CompetitorsSplashSlide></Slide>
+            <Slide><CompetitorsAndAlternatives></CompetitorsAndAlternatives></Slide>
+            <Slide><DifferenceSlide></DifferenceSlide></Slide>
+            <Slide><BuisnesModel></BuisnesModel></Slide>
+            <Slide><TeamSlide></TeamSlide></Slide>
+           </Content> 
+        </Wrap>
     )
 }
 

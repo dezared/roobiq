@@ -79,7 +79,6 @@ const RightBlock = styled.div`
 
 const RightCount = styled.p`
   position: absolute;
-  left: 13%;
   right: 5.73%;
   top: 35.37%;
   font-weight: 500;
@@ -90,7 +89,6 @@ const RightCount = styled.p`
 
 const RightVal = styled.p`
   position: absolute;
-  left: 29.43%;
   right: 5.73%;
   bottom: 35.56%;
   font-weight: 500;
@@ -102,7 +100,6 @@ const RightVal = styled.p`
 
 const RightDescription = styled.p`
   position: absolute;
-  left: 49.43%;
   right: 5.73%;
   top: 70.46%;
   bottom: 20.83%;

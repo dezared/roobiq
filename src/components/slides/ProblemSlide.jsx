@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
 
+
 const SlideBox = styled.div`
   width: 100%;
   height: 100%;
@@ -23,12 +24,44 @@ const Title = styled.h1`
   color: #25A9E0;
 `;
 
+const LeftBlock = styled.div`
+  position: absolute;
+  width: 35%;
+  height: 40%;
+  left: 0;
+  top: 39.6%;
+  background: #25A9E0;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const RightBlock = styled.div`
+  position: absolute;
+  width: 65%;
+  height: 40%;
+  left: 35%;
+  top: 39.6%;
+  background: #fff;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-center;
+  filter: none;
+`;
+
+const LeftTitle = styled.p`
+  position: absolute;
+  left: 14.3%;
+  font-weight: 700;
+  font-size: 2.1em;
+  color: #FFFFFF;
+`;
+
 const TitleList = styled.ul`
   position: absolute;
-  left: 5.21%;
-  right: 43.02%;
-  top: 26.11%;
-  bottom: 56.11%;
+  left: 5%;
   list-style-type: disc;
   list-style-position: inside;
   font-size: 1em;
@@ -36,62 +69,46 @@ const TitleList = styled.ul`
 
 const TitleLi = styled.li`
   font-weight: 300;
-  line-height: 1.4em;
+  line-height: 1.5em;
   font-size: 1em;
   color: #404041;
-`;
-
-const Line = styled.div`
-  position: absolute;
-  left: 5.16%;
-  right: 53.65%;
-  top: 48.81%;
-  bottom: 50.19%;
-  border: 0.1em solid #25A9E0;
-  border-radius: 10px;
-  
-`;
-
-const Description = styled.p`
-  position: absolute;
-  left: 5.21%;
-  right: 14.38%;
-  top: 57.22%;
-  bottom: 13.15%;
-  font-weight: 300;
-  line-height: 1.2em;
-  font-size: 0.9em;
-  color: #404041;
 
 `;
 
-function ProblemSlide({ title, list, desc }) {
+function AuditoriumSlide({ title, leftTitle, titleList }) {
   return (
     <SlideBox>
-      <Title>{title}</Title>
-      <TitleList>
-        {list.map((tit) => <TitleLi key={tit.index}>{tit.desc}</TitleLi>)}
-      </TitleList>
-      <Line/>
-      <Description>{desc}</Description>
+      <Title>{ title }</Title>
+      <div>
+        <LeftBlock>
+          <LeftTitle>
+            { leftTitle }
+          </LeftTitle>
+        </LeftBlock>
+        <RightBlock>  
+          <TitleList>
+            {titleList.map((tit) => <TitleLi key={tit.index}>{tit.desc}</TitleLi>)}
+          </TitleList>
+        </RightBlock>
+      </div>
     </SlideBox>
   )
 }
 
-ProblemSlide.propTypes = {
+AuditoriumSlide.propTypes = {
   title: PropTypes.string,
-  desc: PropTypes.string,
-  list: PropTypes.array,
+  leftTitle: PropTypes.string,
+  titleList: PropTypes.array,
 }
 
-ProblemSlide.defaultProps = {
-  title: 'Problem',
-  desc: 'Большинство сотрудников разного уровня и людей вообще не обладает достаточным набором навыков и компетенций для создания презентаций и тем более для создания полноценного набора материалов по проекту/стартапу. Проблемы подстерегают всюду: от правильной структуры каждого документа до необходимости искать и анализировать информацию + к этому можно добавить оформление всех материалов.',
-  list: [
+AuditoriumSlide.defaultProps = {
+  title: 'Проблема',
+  leftTitle: 'Плохие презентации',
+  titleList: [
     {desc: 'We haven`t this skills', index: 1},
     {desc: 'We haven`t this skills 2', index: 2},
     {desc: 'We haven`t this skills 3', index: 3},
-  ]
-}
+  ],
+};
 
-export default ProblemSlide;
+export default AuditoriumSlide;
