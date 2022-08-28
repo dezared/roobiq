@@ -36,10 +36,8 @@ const Slide = styled.div`
   `;
 
 function SlidesCont( { slides } ) {
-
   return (
     <SlideCont>
-    
       <Slide> <FirstSlide /> </Slide>
     </SlideCont>
   );
