@@ -20,6 +20,7 @@ function RouterNavigator() {
         <Route path="/login" exact><Login /></Route>
         <Route path="/registration" exact><Registration /></Route>
         <Route path="/constructor" exact><ScenarioSelection /></Route>
+        <Route path="/constructor/:id" exact><Chat /></Route>
         <Route path="/components" exact><Components /></Route>
         <Route><p>404 not found</p></Route>
       </Switch>

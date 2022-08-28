@@ -81,7 +81,7 @@ function SolutionSlide({ title, solutionList }) {
             <SolutionItemIcon>{Sl.SolutionItemIcon}</SolutionItemIcon>
             <SolutionItemTitle>{Sl.SolutionItemTitle}</SolutionItemTitle>
             <SolutionItemList>
-              {/* {Sl.SolutionItemList.desc.map((solLi) => <SolutionItemLi key={solLi}>{solLi}</SolutionItemLi>)} */}
+              {Sl.SolutionItemList.desc.map((solLi) => <SolutionItemLi key={solLi}>{solLi}</SolutionItemLi>)}
             </SolutionItemList>
           </SolutionItem>
         ))}
