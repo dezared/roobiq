@@ -48,7 +48,7 @@ const BtnGroup = styled.div`
 function Chat() {
   const scenario = useMemo(() => initScenarios[0], []);
 
-  const [stepIndex, setStepIndex] = useState(9);
+  const [stepIndex, setStepIndex] = useState(0);
 
   const [questionIndex, setQuestionIndex] = useState(0);
 

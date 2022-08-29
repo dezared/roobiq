@@ -41,19 +41,24 @@ const Table = styled.table`
 const MyTableHead = styled.th`
 flex-basis: 100%;
 text-align: center;
-background: #25A9E0;
-color: #fff;
+background: #fff;
+color: #25A9E0;
 font-size: 1.5em;
 `;
 
 const TableRow = styled.tr`
-  display: flex
+  display: flex;
+  &:nth-child(2n) {
+    background: #25A9E0;
+    color: #fff;
+  };
 `;
 
 const TableData = styled.td`
 flex-basis: 100%;
 height: auto;
 text-align: center;
+color: #fff;
 font-size: 1.5em;
 line-height: 1.7em;
 `;
