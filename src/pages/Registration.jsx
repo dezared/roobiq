@@ -86,7 +86,7 @@ function Login() {
         (response) => {
           localStorage.setItem("userAuthorizationToken", JSON.stringify(response.data));
           history.push("/");
-          //window.location.reload();
+          window.location.reload();
           return Promise.resolve();
         },
         (error) => {

@@ -15,6 +15,7 @@ import TextInput from '../../controls/TextInput';
 import Button from '../../controls/Button';
 import ErrorBlock from '../../controls/ErrorBlock';
 import { ActionType } from '../../../configs/scenarios';
+import TextArrayActionBlockForm from './TextArrayActionBlockForm';
 
 const Wrap = styled.div`
   width: 100%;
@@ -172,6 +173,8 @@ const getDefaultValueByType = (type) => {
   switch (type) {
     case ActionType.text:
       return '';
+    case ActionType.textArrayForm:
+      return [];
     default:
       throw new Error(`Action type "${type}" does not exists`);
   }
@@ -186,6 +189,8 @@ const getValidationSchemaByType = (type) => {
   switch (type) {
     case ActionType.text:
       return Yup.string();
+    case ActionType.textArrayForm:
+      return Yup.array();
     default:
       throw new Error(`Action type "${type}" does not exists`);
   }
@@ -202,7 +207,7 @@ const getValidationSchema = (objectFields) => {
   });
 };
 
-function FieldComponent({formik, fieldName, placeholder, type}) {
+function FieldComponent({formik, fieldName, placeholder, type, actionName, onChange, payload, index}) {
   switch (type) {
     case ActionType.text:
       return (
@@ -220,6 +225,16 @@ function FieldComponent({formik, fieldName, placeholder, type}) {
           <ErrorBlock name={`item.${fieldName}`} />
         </InputWrap>
       );
+    case ActionType.textArrayForm:
+      return (
+        <TextArrayActionBlockForm
+          formikParent={formik}
+          payload={payload}
+          onChange={onChange}
+          actionName={actionName}
+          fieldIdParent={index}>
+        </TextArrayActionBlockForm>
+      )
     default:
       throw new Error(`Action type "${type}" does not exists`);
   }
@@ -280,11 +295,15 @@ function ObjectActionBlock({
                       <InputWrap>
                         {payload.objectFields.map((field) => (
                           <FieldComponent
-                            key={field.name}
                             formik={formik}
+                            key={field.name}
                             fieldName={field.name}
                             placeholder={field.placeholder}
                             type={field.type}
+                            actionName={actionName}
+                            onChange={onChange}
+                            payload={field.payload}
+                            index={0}
                           />
                         ))}
                       </InputWrap>

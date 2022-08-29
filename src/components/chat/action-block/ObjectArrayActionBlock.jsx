@@ -18,6 +18,7 @@ import { ActionType } from '../../../configs/scenarios';
 import Checkbox from "../../controls/Checkbox";
 import {Image} from "@mui/icons-material";
 import ImagePicker from "../../controls/ImagePicker";
+import TextArrayActionBlockForm from './TextArrayActionBlockForm';
 
 const Wrap = styled.div`
   width: 100%;
@@ -212,6 +213,8 @@ const getDefaultValueByType = (type) => {
       return [];
     case ActionType.image:
       return null;
+      case ActionType.textArrayForm:
+      return [];
     default:
       throw new Error(`Action type "${type}" does not exists`);
   }
@@ -227,6 +230,8 @@ const getValidationSchemaByType = (type) => {
     case ActionType.text:
       return Yup.string();
     case ActionType.checkboxArray:
+      return Yup.array();
+    case ActionType.textArrayForm:
       return Yup.array();
     case ActionType.image:
       return Yup.string();
@@ -248,11 +253,11 @@ const getValidationSchema = (objectFields) => {
         Yup.object().shape(schemeFields),
       )
       .min(1)
-      .required('Обязательное поле'),
+      .required('Обязательное поле')
   });
 };
 
-function FieldComponent({formik, fieldName, placeholder, type, index, sourceField, answers}) {
+function FieldComponent({formik, fieldName, placeholder, type, index, sourceField, answers, payload, onChange, actionName}) {
   const handleChange = useCallback((e, value) => {
     const arr = [...formik.values.items[index][fieldName]];
     if (e.target.checked) {
@@ -308,6 +313,16 @@ function FieldComponent({formik, fieldName, placeholder, type, index, sourceFiel
           <ErrorBlock name={`items.${index}.${fieldName}`} />
         </InputWrap>
       );
+    case ActionType.textArrayForm:
+      return (
+        <TextArrayActionBlockForm
+          formikParent={formik}
+          payload={payload}
+          onChange={onChange}
+          actionName={actionName}
+          fieldIdParent={index}>
+        </TextArrayActionBlockForm>
+      )
     case ActionType.checkboxArray:
       return (
         <CheckboxesWrap>
@@ -350,6 +365,7 @@ function ObjectArrayActionBlock({
     },
     validationSchema: getValidationSchema(payload.objectFields),
     onSubmit: (values) => {
+      console.log(values)
       onChange({ [actionName]: values.items });
       formik.resetForm();
       handleClose();
@@ -411,6 +427,9 @@ function ObjectArrayActionBlock({
                                   sourceField={field.sourceField}
                                   type={field.type}
                                   answers={answers}
+                                  payload={field.payload}
+                                  onChange={onChange}
+                                  actionName={actionName}
                                 />
                               ))}
                             </InputWrap>

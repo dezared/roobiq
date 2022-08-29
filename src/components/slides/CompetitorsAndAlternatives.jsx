@@ -15,13 +15,11 @@ const SlideBox = styled.div`
 `;
 
 const Title = styled.h1`
-position: absolute;
-left: 5.21%;
-top: 9.26%;
-bottom: 78.89%;
-font-weight: 500;
-font-size: 2em;
-color: #25A9E0;
+  position: absolute;
+  bottom: 80.89%;
+  font-weight: 500;
+  font-size: 2em;
+  color: #25A9E0;
 `;
 
 
@@ -37,29 +35,49 @@ const Table = styled.table`
   width: 100%;
   height: 100%;
 `;
-
 const MyTableHead = styled.th`
-flex-basis: 100%;
-text-align: center;
-background: #25A9E0;
-color: #fff;
-font-size: 1.5em;
+  flex-basis: 100%;
+  text-align: center;
+  background: #fff;
+  color: #25A9E0;
+  font-size: 1.5em;
 `;
 
 const TableRow = styled.tr`
-  display: flex
+  display: flex;
+
+  & svg {
+    stroke: white;
+  };
+
+  &:nth-child(2n) {
+    background: #25A9E0;
+    color: #fff;
+  };
+  &:nth-child(2n+1) {
+    color: #25A9E0;
+
+    & svg {
+      stroke: #25A9E0!important;
+    };
+  };
 `;
 
 const TableData = styled.td`
-flex-basis: 100%;
-height: auto;
-text-align: center;
-font-size: 1.5em;
-line-height: 1.7em;
+  flex-basis: 100%;
+  height: auto;
+  text-align: center;
+  font-size: 1.5em;
+  line-height: 1.7em;
+  border-left: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
 `;
 
 function CompetitorsAndAlternatives({ title, massive, competitors, properties }) {
-    console.log(competitors)
+  console.log(massive)
   return (
     <SlideBox>
       <Title>{title}</Title>
@@ -75,7 +93,16 @@ function CompetitorsAndAlternatives({ title, massive, competitors, properties })
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
               <TableData>{row}</TableData>
-              {massive[index].map((data) => <TableData key={data.key}>{data.flag.toString()}</TableData>)}              </TableRow>
+              {massive[index].map((data) => <TableData key={data.key}>{
+                data.flag? (
+                  <svg width="33" height="58" style={{width: 10 + 'px', height: 20 + 'px'}} viewBox="0 0 33 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.79999 30.6L14.5 47.9L28.8 4.39999" stroke-width="8" stroke-miterlimit="10" stroke-linecap="round"/>
+                  </svg>
+                ):(
+                  <span></span>
+                )
+              }</TableData>)}              
+            </TableRow>
           ))}
       </Table>
     </MyTableContainer>
@@ -91,7 +118,7 @@ CompetitorsAndAlternatives.propTypes = {
 }
 
 CompetitorsAndAlternatives.defaultProps = {
-  title: 'Бизнес-модель',
+  title: 'Конкуренты и альтернативы',
   competitors: [
     {id: 1, name: 'Онлайн редакторы'},
     {id: 2, name: 'Онлайн редакторы 2'},

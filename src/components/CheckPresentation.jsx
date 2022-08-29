@@ -66,7 +66,8 @@ const MyButton = styled(Button)`
   position: absolute;
 `;
 
-function CheckPresentation({ handleChange }) {
+function CheckPresentation({ handleChange, answers }) {
+  console.log(answers)
   return (
     <Wrap>
       <Content>

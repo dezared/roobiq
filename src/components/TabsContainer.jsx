@@ -25,10 +25,7 @@ function TabsContainer({ tabs, currentIndex }) {
   const elRefs = React.useRef([]);
 
   useEffect(() => {
-    if(tabs.lenght <= currentIndex + 1)
-    {
-      elRefs.current[currentIndex + 1].scrollIntoView();
-    }
+      elRefs.current[currentIndex].scrollIntoView();
   }, [currentIndex]);
 
   return (

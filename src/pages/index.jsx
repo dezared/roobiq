@@ -28,8 +28,8 @@ const MyButton = styled(Button)`
   -ms-flex-direction: column;
   flex-direction: column;
   gap: 16px;
-  top: 80%;
-  position: absolute;
+  bottom: 20px;
+  position: absolute!important;
 `;
 
 const ItemsWrap = styled(Stack)`

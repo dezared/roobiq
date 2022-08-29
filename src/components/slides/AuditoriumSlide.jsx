@@ -48,8 +48,8 @@ const Line = styled.div`
   top: 48.81%;
   bottom: 50.19%;
   border: 0.1em solid #25A9E0;
-  border-radius: 10px;
-  
+  background: #25A9E0;
+  border-radius: 3px;
 `;
 
 const Description = styled.p`

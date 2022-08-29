@@ -103,6 +103,13 @@ const SmallestCircle = styled.div`
   border-radius: 100%;
   background: #25A9E0;
   font-size: 0.7em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & h2 {
+    position: unset!important;
+  }
 `;
 
 const RightTitle = styled.h2`
@@ -113,21 +120,52 @@ const RightTitle = styled.h2`
   top: 14%;
 `;
 
+const NamingArrowWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  div {
+    position: relative;
+
+    svg {
+      position: absolute;
+      z-index: 99999;
+      bottom: -2px;
+    }
+  }
+`;
+
 function MarketSlide1({ title, tam, sam, som, sources }) {
   return (
     <SlideBox>
       <Title>{title}</Title>
       <TitlesContainer>
-        <TAM>TAM</TAM>
+        <NamingArrowWrapper>
+          <TAM>TAM</TAM>
+          <div><svg width="119" height="4" viewBox="0 0 813 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.413086 2.10059H812.685" stroke="#C6D5DB" stroke-width="3" stroke-miterlimit="10"/>
+          </svg></div>
+        </NamingArrowWrapper>
         <List>
           {tam.list.map((t) => <Li>{t}</Li>)}
         </List>
 
-        <SAM>SAM</SAM>
+        <NamingArrowWrapper>
+          <SAM>SAM</SAM>
+          <div><svg width="130" height="4" viewBox="0 0 910 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.413086 2.20044H909.602" stroke="#67808A" stroke-width="3" stroke-miterlimit="10"/>
+          </svg></div>
+        </NamingArrowWrapper>
         <List>
           {sam.list.map((s) => <Li>{s}</Li>)}
         </List>
-        <SOM>SOM</SOM>
+        <NamingArrowWrapper>
+          <SOM>SOM</SOM>
+          <div><svg width="140" height="4" viewBox="0 0 978 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.413086 2.10034H977.757" stroke="#25A9E0" stroke-width="3" stroke-miterlimit="10"/>
+          </svg></div>
+        </NamingArrowWrapper>
         <List>
           {som.list.map((s) => <Li>{s}</Li>)}
         </List>

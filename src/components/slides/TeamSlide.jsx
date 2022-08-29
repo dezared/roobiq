@@ -49,27 +49,42 @@ const DevDesc = styled.ul`
 `;
 
 const DevDescLi = styled.li`
-  font-size: 0.5em;
+  font-size: 0.7em;
 `;
 
 const HumanName = styled.h2`
   color: #25A9E0;
-  font-size: 1em;
+  font-size: 1.3em;
 `;
 
 const HumanJob = styled.h3`
   padding-top: 3%;
   color: #082C4E;
-  font-size: 0.5em;
+  font-size: 0.8em;
+`;
+
+const ImageDiv = styled.div`
+  display: block;
+  width: 50px;
+  height: 50px;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 function TeamSlide({ title, people }) {
+  console.log(people)
   return (
     <SlideBox>
       <Title>{title}</Title>
       <ListCont>
         {people.map((ppl) => <Human>
-          <img src="#" alt="Photo"/>
+          <ImageDiv>
+            <img src={ppl.imageSrc} alt="Photo"/>
+          </ImageDiv>
           <HumanName>{ppl.name}</HumanName>
           <HumanJob>{ppl.job}</HumanJob>
           <DevDesc>{ppl.desc.map((li) => <DevDescLi key={li}>{li}</DevDescLi>)}</DevDesc>
@@ -83,7 +98,7 @@ TeamSlide.propTypes = {
   title: PropTypes.string,
   people: PropTypes.array,
 }
-
+  
 TeamSlide.defaultProps = {
   title: 'Команда',
   people: [
@@ -93,6 +108,7 @@ TeamSlide.defaultProps = {
       desc: [
         '1 год опыта где-то там',
       ],
+      imageSrc: ''
     },
     {
       name: 'Антон Лошкарев',
@@ -100,6 +116,7 @@ TeamSlide.defaultProps = {
       desc: [
         'Студент чего-то там',
       ],
+      imageSrc: ''
     },
     {
       name: 'Вячеслав Харламов',
@@ -107,6 +124,7 @@ TeamSlide.defaultProps = {
       desc: [
         '25 лет опыта в дизайне',
       ],
+      imageSrc: ''
     },
     {
       name: 'Лев Погосов',
@@ -114,6 +132,7 @@ TeamSlide.defaultProps = {
       desc: [
         '13 лет опыта в разработке',
       ],
+      imageSrc: ''
     },
   ],
 }
