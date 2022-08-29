@@ -20,6 +20,7 @@ const Wrap = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 10px;
+  background: #fff;
 `;
 
 const Content = styled.div`
@@ -30,119 +31,118 @@ const Content = styled.div`
 `;
 
 const Slide = styled.div`
-<<<<<<< HEAD
   border: 1px solid #f4f4f4;
-  width: 100%;
+  width: 350px;
   height: 200px;
   font-size: 7px;
   margin-top: 20px;
-  @media (max-width: 320px) {
-    width: 90%;
-    margin-left: 5%;
-    height: 160px;
-  };
-  @media (max-width: 360px) {
-    width: 90%;
-    margin-left: 5%;
-    height: 185px;
-  };
-  @media (max-width: 400px) {
-    width: 90%;
-    margin-left: 5%;
-    height: 220px;
-  };
-  @media (max-width: 440px) {
-    width: 90%;
-    margin-left: 5%;
-    font-size: 9px;
-    height: 225px;
-  };
-  @media (max-width: 500px) {
-    width: 90%;
-    margin-left: 5%;
-    height: 255px;
-    font-size: 10px;
-  };
-  @media (max-width: 540px) {
-    width: 90%;
-    margin-left: 5%;
-    font-size: 11px;
-    height: 280px;
-  };
-  @media (max-width: 600px) {
-    width: 90%;
-    margin-left: 5%;
-    height: 300px;
-    font-size: 11px;
-  };
-  @media (max-width: 640px) {
-    width: 90%;
-    margin-left: 5%;
-    height: 325px;
-    font-size: 13px;
-  };
-  @media (max-width: 700px) {
-    width: 90%;
-    margin-left: 5%;
-    font-size: 15px;
-    height: 360px;
-  };
-  @media (max-width: 750px) {
-    width: 90%;
-    margin-left: 5%;
-    font-size: 17px;
-    height: 410px;
-  };
-  @media (max-width: 870px) {
-    width: 90%;
-    margin-left: 5%;
-    font-size: 18px;
-    height: 450px;
-  };
-  @media (max-width: 920px) {
-    width: 90%;
-    margin-left: 5%;
-    font-size: 19px;
-    height: 495px;
-  };
-  @media (max-width: 1000px) {
-    width: 90%;
-    margin-left: 5%;
-    font-size: 20px;
-    height: 550px;
-  };
-  @media (max-width: 1092px) {
-    width: 90%;
-    margin-left: 5%;
-    font-size: 22px;
-    height: 620px;
-  };
-  @media (max-width: 1200px) {
-    width: 90%;
-    margin-left: 5%;
-    font-size: 24px;
-    height: 655px;
-  };
-  @media (max-width: 1350px) {
-    width: 90%;
-    margin-left: 5%;
-    font-size: 27px;
-    height: 745px;
-  };
-  @media (max-width: 1485px) {
-    width: 90%;
-    margin-left: 5%;
-    font-size: 15px;
-    height: 755px;
-  };
-=======
-    background: white;
-    border-radius: 10px;
-    width: 100%;
-    height: 200px;
-    font-size: 7px;
-    margin-top: 10px;
->>>>>>> d74bcaa696dff2fcbfe26cffcb75b79c19c256d3
+  margin-left: 20px;
+//   @media (max-width: 320px) {
+//     width: 90%;
+//     margin-left: 5%;
+//     height: 160px;
+//   };
+//   @media (max-width: 360px) {
+//     width: 90%;
+//     margin-left: 5%;
+//     height: 185px;
+//   };
+//   @media (max-width: 400px) {
+//     width: 90%;
+//     margin-left: 5%;
+//     height: 220px;
+//   };
+//   @media (max-width: 440px) {
+//     width: 90%;
+//     margin-left: 5%;
+//     font-size: 9px;
+//     height: 225px;
+//   };
+//   @media (max-width: 500px) {
+//     width: 90%;
+//     margin-left: 5%;
+//     height: 255px;
+//     font-size: 10px;
+//   };
+//   @media (max-width: 540px) {
+//     width: 90%;
+//     margin-left: 5%;
+//     font-size: 11px;
+//     height: 280px;
+//   };
+//   @media (max-width: 600px) {
+//     width: 90%;
+//     margin-left: 5%;
+//     height: 300px;
+//     font-size: 11px;
+//   };
+//   @media (max-width: 640px) {
+//     width: 90%;
+//     margin-left: 5%;
+//     height: 325px;
+//     font-size: 13px;
+//   };
+//   @media (max-width: 700px) {
+//     width: 90%;
+//     margin-left: 5%;
+//     font-size: 15px;
+//     height: 360px;
+//   };
+//   @media (max-width: 750px) {
+//     width: 90%;
+//     margin-left: 5%;
+//     font-size: 17px;
+//     height: 410px;
+//   };
+//   @media (max-width: 870px) {
+//     width: 90%;
+//     margin-left: 5%;
+//     font-size: 18px;
+//     height: 450px;
+//   };
+//   @media (max-width: 920px) {
+//     width: 90%;
+//     margin-left: 5%;
+//     font-size: 19px;
+//     height: 495px;
+//   };
+//   @media (max-width: 1000px) {
+//     width: 90%;
+//     margin-left: 5%;
+//     font-size: 20px;
+//     height: 550px;
+//   };
+//   @media (max-width: 1092px) {
+//     width: 90%;
+//     margin-left: 5%;
+//     font-size: 22px;
+//     height: 620px;
+//   };
+//   @media (max-width: 1200px) {
+//     width: 90%;
+//     margin-left: 5%;
+//     font-size: 24px;
+//     height: 655px;
+//   };
+//   @media (max-width: 1350px) {
+//     width: 90%;
+//     margin-left: 5%;
+//     font-size: 27px;
+//     height: 745px;
+//   };
+//   @media (max-width: 1485px) {
+//     width: 90%;
+//     margin-left: 5%;
+//     font-size: 15px;
+//     height: 755px;
+//   };
+// =======
+//     background: white;
+//     border-radius: 10px;
+//     width: 100%;
+//     height: 200px;
+//     font-size: 7px;
+//     margin-top: 10px;
 `;
 
 function ViewPresentation({ answers, handleChange })

@@ -21,7 +21,7 @@ function RouterNavigator() {
       <Switch>
         { user && user.token? (
           <>
-            <Redirect to="/" />
+            {/* <Redirect to="/" /> */}
             <Route path="/" exact><Main /></Route>
             <Route path="/constructor" exact><ScenarioSelection /></Route>
             <Route path="/constructor/:id" exact><Chat /></Route>
@@ -30,7 +30,7 @@ function RouterNavigator() {
           </>
         ):(
           <>
-            <Redirect to="/login" />
+            {/* <Redirect to="/login" /> */}
             <Route path="/login" exact><Login /></Route>
             <Route path="/registration" exact><Registration /></Route>
           </>
