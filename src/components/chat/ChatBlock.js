@@ -92,6 +92,8 @@ const getFieldContent = (field, item) => {
       return `${field.label}: ${item[field.name].join(', ') || '-'}`;
     case ActionType.image:
       return null;
+    case ActionType.textArrayForm:
+      return `${field.label}: ${item[field.name]}`;
     default:
       throw new Error(`Answer type "${field.type}" does not exists`);
   }
@@ -100,7 +102,7 @@ const getFieldContent = (field, item) => {
 function AnswerBlock({ answerType, answer, payload }) {
   switch (answerType) {
     case ActionType.text:
-    case ActionType.selectSingle:
+    case ActionType.selectSingle: 
       return <AnswerBackground>{answer}</AnswerBackground>;
     case ActionType.costs:
     case ActionType.unitEconomy:

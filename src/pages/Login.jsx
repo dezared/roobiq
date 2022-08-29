@@ -100,6 +100,7 @@ function Login() {
         (response) => {
           localStorage.setItem("userAuthorizationToken", JSON.stringify(response.data));
           history.push("/");
+          document.location.reload();
           return Promise.resolve();
         },
         (error) => {

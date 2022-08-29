@@ -78,6 +78,7 @@ const SolutionItemLi = styled.li`
 `;
 
 function SolutionSlide({ title, solutionList }) {
+  console.log(solutionList)
   return (
     <SlideBox>
       <Title>{title}</Title>

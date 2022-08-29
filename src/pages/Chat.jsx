@@ -46,7 +46,7 @@ const BtnGroup = styled.div`
 
 // eslint-disable-next-line react/prop-types
 function Chat() {
-  const scenario = useMemo(() => initScenarios[0], []);
+  const scenario = useMemo(() => initScenarios[1], []);
 
   const [stepIndex, setStepIndex] = useState(0);
 
@@ -185,8 +185,8 @@ function Chat() {
                 <Button onClick={handleChangePresentationCompleteViewer}>Закончить создание</Button>
               ) : (
                 <>
-                  <Button color="secondary" onClick={onNextTab}>Продолжить создание</Button>
                   <Button onClick={handleOpen}>Смотреть</Button>
+                  <Button color="secondary" onClick={onNextTab}>Продолжить создание</Button>  
                 </>
               )}
             </BtnGroup>
@@ -195,16 +195,17 @@ function Chat() {
               onClose={handleClose}
             >
               <div>
-                <CheckPresentation handleChange={handleChange}></CheckPresentation>
+                <CheckPresentation answers={answers} handleChange={handleChange}></CheckPresentation>
               </div>
             </Modal>
 
             <Modal
               open={openPresentationCompleteViewer}
               onClose={handleClosePresentationCompleteViewer}
+              sx={{ overflow: "scroll" }}
             >
               <div>
-                <ViewPresentation handleChange={handleChangePresentationCompleteViewer}></ViewPresentation>
+                <ViewPresentation answers={answers} handleChange={handleChangePresentationCompleteViewer}></ViewPresentation>
               </div>
             </Modal>
           </div>
