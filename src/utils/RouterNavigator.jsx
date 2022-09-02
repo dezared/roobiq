@@ -21,7 +21,6 @@ function RouterNavigator() {
       <Switch>
         { user && user.token? (
           <>
-            <Redirect to="/" />
             <Route path="/" exact><Main /></Route>
             <Route path="/constructor" exact><ScenarioSelection /></Route>
             <Route path="/constructor/:id" exact><Chat /></Route>

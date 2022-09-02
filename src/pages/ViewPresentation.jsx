@@ -37,6 +37,7 @@ const Slide = styled.div`
     height: 200px;
     font-size: 7px;
     margin-top: 10px;
+    border: 1px solid #f8f8f8;
 `;
 
 function ViewPresentation({ answers, handleChange })
@@ -62,7 +63,7 @@ function ViewPresentation({ answers, handleChange })
                          SolutionItemList: { desc: v.description, index: index} 
                          }})}></SolutionSlide></Slide>
             <Slide><MarketSlide1 title={"Рынок: " + answers[4][0]["market_segments"].join(", ")}
-                sources={answers[4][1]["market_tam"].source.concat(answers[4][2]["market_sam"].source, answers[4][3]["market_som"].source).split('').join(", ")}
+                sources={(answers[4][1]["market_tam"].source + " ").concat((answers[4][2]["market_sam"].source + " "), (answers[4][3]["market_som"].source + " "))}
                 tam={{
                     value: answers[4][1]["market_tam"].amount,
                     list: answers[4][1]["market_tam"].description
@@ -92,7 +93,7 @@ function ViewPresentation({ answers, handleChange })
                         }))
 
                         return mass;
-                    })[0] 
+                    })
                 }></CompetitorsAndAlternatives></Slide>
             <Slide><DifferenceSlide solution={answers[5][2]["competitors_difference"]}></DifferenceSlide></Slide>
             <Slide><TeamSlide people={answers[6][0]["members"].map(function(v) {
@@ -120,141 +121,160 @@ function encodeImageFileAsURL(file) {
 
 ViewPresentation.defaultProps = { 
     answers: [
-    [
-        {
-            "project_name": "1"
-        },
-        {
-            "project_description": "1"
-        }
-    ],
-    [
-        {
-            "audience_segments": [
-                "1"
-            ]
-        },
-        {
-            "segments_short_description": "1"
-        }
-    ],
-    [
-        {
-            "problem": "1"
-        },
-        {
-            "problem_details": [
-                "1233",
-                "13",
-                "1"
-            ]
-        },
-        {
-            "problem_short_description": "1"
-        }
-    ],
-    [
-        {
-            "product_feature": "1"
-        },
-        {
-            "audience_segments": [
-                {
-                    "name": "1",
-                    "description": [
-                        "2"
-                    ]
-                },
-                {
-                    "name": "1",
-                    "description": [
-                        "3"
-                    ]
-                },
-                {
-                    "name": "1",
-                    "description": [
-                        "4"
-                    ]
-                }
-            ]
-        }
-    ],
-    [
-        {
-            "market_segments": [
-                "B2G"
-            ]
-        },
-        {
-            "market_tam": {
-                "amount": "312",
-                "description": [
-                    "dadadad"
-                ],
-                "source": "321"
+        [
+            {
+                "project_name": "Roobiq"
+            },
+            {
+                "project_description": "Наш проект предназначен для работы с презентациями. Создавайте презентации без работы с графикой и сторонними приложенями. Прямо на мобильном устройстве."
             }
-        },
-        {
-            "market_sam": {
-                "amount": "312",
-                "description": [
-                    "dadadad"
-                ],
-                "source": "321"
+        ],
+        [
+            {
+                "audience_segments": [
+                    "Студенты",
+                    "Стартаперы"
+                ]
+            },
+            {
+                "segments_short_description": "Повседневное приложения для тех, кто делает презентации часто."
             }
-        },
-        {
-            "market_som": {
-                "amount": "312",
-                "description": [
-                    "dadadad"
-                ],
-                "source": "321"
+        ],
+        [
+            {
+                "problem": "Быстрота создания презентаций прямо на мобильном устройстве."
+            },
+            {
+                "problem_details": [
+                    "Быстрота работы.",
+                    "Удобство работы.",
+                    "Шейринг результата по ссылке.",
+                    "Надёжное хранение данных.",
+                    "Без работы с графикой."
+                ]
+            },
+            {
+                "problem_short_description": "Рубик представляет множество различных видов презентаций с различным дизайном. Для любых целей."
             }
-        }
-    ],
-    [
-        {
-            "competitors_properties": [
-                "1"
-            ]
-        },
-        {
-            "direct_competitors": [
-                {
-                    "name": "1",
-                    "properties": []
-                },
-                {
-                    "name": "3",
-                    "properties": [
-                        "1"
-                    ]
-                },
-                {
-                    "name": "8",
-                    "properties": []
+        ],
+        [
+            {
+                "product_feature": "Удобное веб-приложение с дизайном формата mobile-first. Вводите текст и получите готовую презентацию."
+            },
+            {
+                "audience_segments": [
+                    {
+                        "name": "Быстрота работы",
+                        "description": [
+                            "Скорость работы обусловлена тем, что вам нужно потратить всего 5 минут для заполнения анкеты.",
+                            "Программа сама генерирует изоображения и вы можете сохранить их в любом удобном месте и формате."
+                        ]
+                    },
+                    {
+                        "name": "Удобство работы.",
+                        "description": [
+                            "Никакой работы с графикой, шрифтами. Рубик все сделает за вас. От вас требуется только ввод текста и настройка презентации.",
+                            "Не передавайте файл другим людям. Просто отправьте ссылку на презентацию."
+                        ]
+                    },
+                    {
+                        "name": "Безопасность",
+                        "description": [
+                            "Настраивайте вашу ссылку на презентации как хотите. Дайте доступ только по ссылке, или определенным пользователям."
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "market_segments": [
+                    "B2C",
+                    "B2B"
+                ]
+            },
+            {
+                "market_tam": {
+                    "amount": "5.000$",
+                    "description": [
+                        "Поянение номер 1"
+                    ],
+                    "source": "https://nc.ru/roobiq"
                 }
-            ]
-        },
-        {
-            "competitors_difference": "3"
-        }
-    ],
-    [
-        {
-            "members": [
-                {
-                    "name": "312",
-                    "role": "321",
-                    "experience": [ "312" ],
-                    "image": {}
+            },
+            {
+                "market_sam": {
+                    "amount": "12.100$",
+                    "description": [
+                        "Пояснение номер 2"
+                    ],
+                    "source": "https://nc.ru/roobiq-sam"
                 }
-            ]
-        }
+            },
+            {
+                "market_som": {
+                    "amount": "50.000$",
+                    "description": [
+                        "Пояснение номер 3"
+                    ],
+                    "source": "https://nc.ru/roobiq-som"
+                }
+            }
+        ],
+        [
+            {
+                "competitors_properties": [
+                    "Свойство конкурента номер 1",
+                    "Свойство конкурента номер 2",
+                    "Свойство конкурента номер 3",
+                    "Свойство конкурента номер 4"
+                ]
+            },
+            {
+                "direct_competitors": [
+                    {
+                        "name": "Конкурент 1",
+                        "properties": [
+                            "Свойство конкурента номер 1",
+                            "Свойство конкурента номер 3"
+                        ]
+                    },
+                    {
+                        "name": "Конкурент 2",
+                        "properties": [
+                            "Свойство конкурента номер 2",
+                            "Свойство конкурента номер 3",
+                            "Свойство конкурента номер 4"
+                        ]
+                    },
+                    {
+                        "name": "Конкурент 3",
+                        "properties": [
+                            "Свойство конкурента номер 1",
+                            "Свойство конкурента номер 2"
+                        ]
+                    }
+                ]
+            },
+            {
+                "competitors_difference": "В отличии от большинства конкурентов, мы предлагаем возможность созданя большого количества видов презентации."
+            }
+        ],
+        [
+            {
+                "members": [
+                    {
+                        "name": "Александр Вадимович",
+                        "role": "PR Менеджер",
+                        "experience": [
+                            "Без опыта"
+                        ],
+                        "image": {}
+                    }
+                ]
+            }
+        ]
     ]
-]
 }
 
 export default ViewPresentation;

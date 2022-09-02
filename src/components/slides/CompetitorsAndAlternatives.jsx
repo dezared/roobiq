@@ -67,8 +67,8 @@ const TableData = styled.td`
   flex-basis: 100%;
   height: auto;
   text-align: center;
-  font-size: 1.5em;
-  line-height: 1.7em;
+  font-size: 1em;
+  line-height: 1.3em;
   border-left: 1px solid white;
   display: flex;
   align-items: center;
@@ -77,7 +77,7 @@ const TableData = styled.td`
 `;
 
 function CompetitorsAndAlternatives({ title, massive, competitors, properties }) {
-  console.log(massive)
+  console.log(massive, competitors, properties)
   return (
     <SlideBox>
       <Title>{title}</Title>
@@ -89,13 +89,13 @@ function CompetitorsAndAlternatives({ title, massive, competitors, properties })
         </TableRow>
           {properties.map((row, index) => (
             <TableRow
-              key={row}
+              key={console.log(massive[index])}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
               <TableData>{row}</TableData>
-              {massive[index].map((data) => <TableData key={data.key}>{
+              {massive[index][0].map((data) => <TableData key={data.key}>{
                 data.flag? (
-                  <svg width="33" height="58" style={{width: 10 + 'px', height: 20 + 'px'}} viewBox="0 0 33 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="29" height="44" style={{width: 8 + 'px', height: 17 + 'px'}} viewBox="0 0 33 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4.79999 30.6L14.5 47.9L28.8 4.39999" stroke-width="8" stroke-miterlimit="10" stroke-linecap="round"/>
                   </svg>
                 ):(
