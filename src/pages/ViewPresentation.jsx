@@ -1,5 +1,5 @@
 import { DefineSlide } from '../components/slides/DefineSlide';
-import { SLIDE_LIST } from '../configs/constants';
+import scenarios from '../configs/scenarios';
 
 import styled from 'styled-components';
 
@@ -135,16 +135,16 @@ const Slide = styled.div`
 //     margin-top: 10px;
 `;
 
-function ViewPresentation({ answers, handleChange })
+function ViewPresentation({ answers, scenarioId, handleChange })
 {
-    console.log(answers);
     return (
         <Wrap>
           <Content>
-            {SLIDE_LIST.map((item) => {
+            {scenarios[scenarioId]?.steps.map((item) => {
+                const currentType = item.slideType;
                 return (
                     <Slide>
-                        <DefineSlide type={item} answers={answers} key={`SLIDE_${item}`} />
+                        <DefineSlide type={currentType} answers={answers} key={`SLIDE_${item}`} />
                     </Slide>
                 )
             })}

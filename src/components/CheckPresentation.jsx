@@ -1,9 +1,9 @@
-import React, {  } from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import Button from './controls/Button';
 import SlidesCont from "./SlidesContainer";
 import { DefineSlide } from './slides/DefineSlide';
-import { SLIDE_LIST } from '../configs/constants';
+import scenarios from '../configs/scenarios';
 
 const Wrap = styled.div`
   width: 100%;
@@ -63,15 +63,15 @@ const MyButton = styled(Button)`
   position: absolute;
 `;
 
-function CheckPresentation({ handleChange, answers, сurrentStep }) {
+function CheckPresentation({ handleChange, answers, сurrentStep, scenarioId }) {
+  const currentType = useMemo(() => scenarios[scenarioId]?.steps[сurrentStep]?.slideType, [scenarioId, сurrentStep]);
 
-  console.log(answers[сurrentStep], сurrentStep)
   return (
     <Wrap>
       <Content>
         <Title>Презентация по итогу одной из секций</Title>
         <Window>
-          <DefineSlide answers={answers} type={SLIDE_LIST[сurrentStep]} />
+          <DefineSlide answers={answers} type={currentType} />
         </Window>
         <SlidesCont />
           <MyButton onClick={handleChange}>Вернуться к созданию</MyButton>
