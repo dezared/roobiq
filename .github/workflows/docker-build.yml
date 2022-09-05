@@ -1,0 +1,20 @@
+name: Build dockerfile and push SSH ( client-side )
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: alex-ac/github-action-ssh-docker-compose@master
+      name: Docker-Compose Remote Deployment ( client-side )
+      with:
+        ssh_host: 185.91.55.155
+        ssh_private_key: ${{ secrets.MAIN_SSH_KEY}}
+        ssh_user: docker-deploy
+        docker_compose_filename: ./docker-compose.yml
